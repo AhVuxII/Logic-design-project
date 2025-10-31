@@ -1,0 +1,4 @@
+INFO: [VRFC 10-2263] Analyzing Verilog file "F:/VIVADO WORKSPACE/image_rotate/image_rotate.srcs/sources_1/new/image_rotate.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module image_rotate
+INFO: [VRFC 10-2263] Analyzing Verilog file "F:/VIVADO WORKSPACE/image_rotate/image_rotate.srcs/sim_1/new/image_rotate_tb.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module image_rotate_tb
