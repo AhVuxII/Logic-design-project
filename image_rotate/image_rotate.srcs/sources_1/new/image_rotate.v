@@ -34,11 +34,14 @@ module image_rotate #(
     input [1:0]mode,
     output done,
     
-    input [data-1 :0] data_in, // send original img pixel in to process
-    output reg [data-1 :0] data_out, // send new img pixel out after process
-    output reg [addr_size-1 :0] addr_mem,// pixel's location for processing
-    
+    // original img
+    input [7 :0] data_in, // send original img pixel in to process
+    output reg [addr_size-1 :0] addr_A,// pixel's location for reading
     output reg rd_en,
+    
+    // new img
+    output reg [7 :0] data_out, // send new img pixel out after process
+    output reg [7 :0] addr_B, // pixel's location for writing
     output reg wr_en
  );
   
@@ -59,7 +62,7 @@ module image_rotate #(
     reg [2:0] state, next_state;
     reg [addr_size-1 :0] counter_x;
     reg [addr_size-1 :0] counter_y;
-    reg [data-1 :0] temp_data; // store pixels read from RAM (FIFO/buffer)
+    reg [7 :0] temp_data; // store pixels read from RAM (FIFO/buffer)
     reg done_reg;
     
     reg [addr_size-1 :0] x_new;
@@ -208,19 +211,20 @@ module image_rotate #(
         
         // 5. MEMORY INTERFACE
     always @(*) begin
-        addr_mem = 0;
+        addr_A = 0;
+        addr_B = 0;
         data_out = 0;
         rd_en = 0;
         wr_en = 0;
         
         case (state)
             READ: begin
-                addr_mem = addr_in;
+                addr_A = addr_in;
                 rd_en = 1;
             end
             
             WRITE_NEXT: begin
-                addr_mem = addr_out;
+                addr_B = addr_out;
                 data_out = temp_data;
                 wr_en = 1;
             end

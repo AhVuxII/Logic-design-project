@@ -22,8 +22,8 @@
 // Settings -> Simulation -> Simulation trong tab ben phai -> chuyen xsim.simulate.runtime tu 100ns thanh 100us de xem het testcase
 
 module image_rotate_tb;
-    parameter img_x = 8;
-    parameter img_y = 8;
+    parameter img_x = 5;
+    parameter img_y = 3;
     parameter data = 8;
     
     localparam img_size = img_x * img_y;
