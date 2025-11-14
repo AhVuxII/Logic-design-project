@@ -6,12 +6,13 @@ original:
 07 08 09 
 0a 0b 0c 
 0d 0e 0f 
+10 11 12 
 //////////////////
 rotate CW result:
 ///////////
-0d 0a 07 04 01 
-0e 0b 08 05 02 
-0f 0c 09 06 03 
+10 0d 0a 07 04 01 
+11 0e 0b 08 05 02 
+12 0f 0c 09 06 03 
 ///////////
 original:
 //////////////////
@@ -20,12 +21,13 @@ original:
 07 08 09 
 0a 0b 0c 
 0d 0e 0f 
+10 11 12 
 //////////////////
 rotate CCW result:
 ///////////
-03 06 09 0c 0f 
-02 05 08 0b 0e 
-01 04 07 0a 0d 
+03 06 09 0c 0f 12 
+02 05 08 0b 0e 11 
+01 04 07 0a 0d 10 
 ///////////
 original:
 //////////////////
@@ -34,6 +36,7 @@ original:
 07 08 09 
 0a 0b 0c 
 0d 0e 0f 
+10 11 12 
 //////////////////
 mirror H result:
 ///////////
@@ -42,6 +45,7 @@ mirror H result:
 09 08 07 
 0c 0b 0a 
 0f 0e 0d 
+12 11 10 
 ///////////
 original:
 //////////////////
@@ -50,13 +54,15 @@ original:
 07 08 09 
 0a 0b 0c 
 0d 0e 0f 
+10 11 12 
 //////////////////
 mirror V result:
 ///////////
+10 11 12 
 0d 0e 0f 
 0a 0b 0c 
 07 08 09 
 04 05 06 
 01 02 03 
 ///////////
-$finish called at time : 2775 ns : File "F:/VIVADO WORKSPACE/image_rotate/image_rotate.srcs/sim_1/new/image_rotate_tb.v" Line 141
+$finish called at time : 3135 ns : File "F:/VIVADO WORKSPACE/image_rotate/image_rotate.srcs/sim_1/new/image_rotate_tb.v" Line 143

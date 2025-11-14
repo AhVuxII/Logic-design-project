@@ -22,7 +22,7 @@
 // Settings -> Simulation -> Simulation trong tab ben phai -> chuyen xsim.simulate.runtime tu 100ns thanh 100us de xem het testcase
 
 module image_rotate_tb;
-    parameter img_x = 5;
+    parameter img_x = 6;
     parameter img_y = 3;
     parameter data = 8;
     
@@ -43,7 +43,8 @@ module image_rotate_tb;
     
     reg [data-1 :0] data_in;
     wire [data-1 :0] data_out;
-    wire [addr_size-1 :0] addr_mem;
+    wire [addr_size-1 :0] addr_A;
+    wire [addr_size-1 :0] addr_B;
     
     wire wr_en;
     wire rd_en;
@@ -64,7 +65,8 @@ module image_rotate_tb;
         .done(done),
         .data_in(data_in),
         .data_out(data_out),
-        .addr_mem(addr_mem),
+        .addr_A(addr_A),
+        .addr_B(addr_B),
         .rd_en(rd_en),
         .wr_en(wr_en)
     );
@@ -73,10 +75,10 @@ module image_rotate_tb;
     
     always @(posedge clk) begin
         if (rd_en) begin
-            data_in <= memory_in[addr_mem];
+            data_in <= memory_in[addr_A];
         end
         if (wr_en) begin
-            memory_out[addr_mem] <= data_out;
+            memory_out[addr_B] <= data_out;
         end
     end
     

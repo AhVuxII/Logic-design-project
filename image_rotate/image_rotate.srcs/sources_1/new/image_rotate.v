@@ -20,8 +20,8 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 module image_rotate #(
-    parameter img_x = 8, // row M (height)
-    parameter img_y = 8, // column N (width)
+    parameter img_x = 256, // row M (height)
+    parameter img_y = 256, // column N (width)
     parameter data = 8, // 2^8 = 256 -> grayscale image
 
     localparam img_size = img_x * img_y,
