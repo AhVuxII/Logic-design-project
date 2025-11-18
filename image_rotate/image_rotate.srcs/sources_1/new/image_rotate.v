@@ -140,7 +140,6 @@ module image_rotate #(
                 end
                 
                 WRITE_NEXT: begin
-                    if (!img_done) begin
                         if (counter_y == img_y - 1) begin // da toi cot cuoi cung
                             counter_y <= 0;
                             counter_x <= counter_x + 1; // xuong hang tiep theo
@@ -148,12 +147,8 @@ module image_rotate #(
                         else begin
                             counter_y <= counter_y + 1; // cot tiep theo
                         end
-                    end
                 end
                 
-                DONE: begin
-                    //done_reg <= 1;
-                end
             endcase
           end
       end

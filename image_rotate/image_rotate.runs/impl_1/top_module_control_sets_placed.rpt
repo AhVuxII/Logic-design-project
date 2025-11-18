@@ -1,8 +1,8 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2023.1 (win64) Build 3865809 Sun May  7 15:05:29 MDT 2023
-| Date         : Tue Nov 18 10:19:30 2025
-| Host         : DESKTOP-7IUMTM5 running 64-bit major release  (build 9200)
+| Date         : Tue Nov 18 14:29:38 2025
+| Host         : DESKTOP-R8IJURE running 64-bit major release  (build 9200)
 | Command      : report_control_sets -verbose -file top_module_control_sets_placed.rpt
 | Design       : top_module
 | Device       : xc7z020
@@ -23,11 +23,11 @@ Table of Contents
 +----------------------------------------------------------+-------+
 |                          Status                          | Count |
 +----------------------------------------------------------+-------+
-| Total control sets                                       |    24 |
-|    Minimum number of control sets                        |    24 |
+| Total control sets                                       |    25 |
+|    Minimum number of control sets                        |    25 |
 |    Addition due to synthesis replication                 |     0 |
 |    Addition due to physical synthesis replication        |     0 |
-| Unused register locations in slices containing registers |    82 |
+| Unused register locations in slices containing registers |    96 |
 +----------------------------------------------------------+-------+
 * Control sets can be merged at opt_design using control_set_merge or merge_equivalent_drivers
 ** Run report_qor_suggestions for automated merging and remapping suggestions
@@ -39,13 +39,13 @@ Table of Contents
 +--------------------+-------+
 |       Fanout       | Count |
 +--------------------+-------+
-| Total control sets |    24 |
+| Total control sets |    25 |
 | >= 0 to < 4        |     9 |
-| >= 4 to < 6        |     3 |
-| >= 6 to < 8        |     1 |
+| >= 4 to < 6        |     4 |
+| >= 6 to < 8        |     0 |
 | >= 8 to < 10       |     5 |
 | >= 10 to < 12      |     1 |
-| >= 12 to < 14      |     1 |
+| >= 12 to < 14      |     2 |
 | >= 14 to < 16      |     0 |
 | >= 16              |     4 |
 +--------------------+-------+
@@ -58,12 +58,12 @@ Table of Contents
 +--------------+-----------------------+------------------------+-----------------+--------------+
 | Clock Enable | Synchronous Set/Reset | Asynchronous Set/Reset | Total Registers | Total Slices |
 +--------------+-----------------------+------------------------+-----------------+--------------+
-| No           | No                    | No                     |               8 |            5 |
+| No           | No                    | No                     |              12 |           10 |
 | No           | No                    | Yes                    |               3 |            3 |
 | No           | Yes                   | No                     |               0 |            0 |
-| Yes          | No                    | No                     |              47 |           26 |
-| Yes          | No                    | Yes                    |              84 |           31 |
-| Yes          | Yes                   | No                     |              16 |            6 |
+| Yes          | No                    | No                     |              51 |           26 |
+| Yes          | No                    | Yes                    |              86 |           27 |
+| Yes          | Yes                   | No                     |              16 |            4 |
 +--------------+-----------------------+------------------------+-----------------+--------------+
 
 
@@ -73,30 +73,31 @@ Table of Contents
 +-----------------------+---------------------------------+-------------------+------------------+----------------+--------------+
 |      Clock Signal     |          Enable Signal          |  Set/Reset Signal | Slice Load Count | Bel Load Count | Bels / Slice |
 +-----------------------+---------------------------------+-------------------+------------------+----------------+--------------+
-|  clk_125mhz_IBUF_BUFG | rx/rx_data[6]                   |                   |                1 |              1 |         1.00 |
 |  clk_125mhz_IBUF_BUFG | rx/rx_data[1]                   |                   |                1 |              1 |         1.00 |
-|  clk_125mhz_IBUF_BUFG | rx/rx_data[4]                   |                   |                1 |              1 |         1.00 |
-|  clk_125mhz_IBUF_BUFG | rx/rx_data[2]                   |                   |                1 |              1 |         1.00 |
+|  clk_125mhz_IBUF_BUFG | rx/rx_data[6]                   |                   |                1 |              1 |         1.00 |
 |  clk_125mhz_IBUF_BUFG | rx/rx_data[5]                   |                   |                1 |              1 |         1.00 |
-|  clk_125mhz_IBUF_BUFG | rx/rx_data[7]                   |                   |                1 |              1 |         1.00 |
+|  clk_125mhz_IBUF_BUFG | rx/rx_data[2]                   |                   |                1 |              1 |         1.00 |
 |  clk_125mhz_IBUF_BUFG | rx/rx_data[3]                   |                   |                1 |              1 |         1.00 |
+|  clk_125mhz_IBUF_BUFG | rx/rx_data[7]                   |                   |                1 |              1 |         1.00 |
 |  clk_125mhz_IBUF_BUFG | rx/rx_data[0]                   |                   |                1 |              1 |         1.00 |
-|  clk_125mhz_IBUF_BUFG |                                 | uut/AR[0]         |                3 |              3 |         1.00 |
-|  clk_125mhz_IBUF_BUFG | rx/bit_index                    |                   |                2 |              4 |         2.00 |
-|  clk_125mhz_IBUF_BUFG | tx/bit_index                    | tx/out_tx_serial0 |                2 |              4 |         2.00 |
-|  clk_125mhz_IBUF_BUFG | uut/FSM_onehot_state[4]_i_1_n_0 | uut/AR[0]         |                3 |              5 |         1.67 |
-|  clk_125mhz_IBUF_BUFG | tx/E[0]                         | uut/AR[0]         |                2 |              7 |         3.50 |
-|  clk_125mhz_IBUF_BUFG |                                 |                   |                5 |              8 |         1.60 |
-|  clk_125mhz_IBUF_BUFG | tx_byte                         |                   |                4 |              8 |         2.00 |
-|  clk_125mhz_IBUF_BUFG | uut/temp_data_0                 | uut/AR[0]         |                7 |              8 |         1.14 |
-|  clk_125mhz_IBUF_BUFG | rx/out_rx_byte[7]_i_1_n_0       |                   |                4 |              8 |         2.00 |
+|  clk_125mhz_IBUF_BUFG | rx/rx_data[4]                   |                   |                1 |              1 |         1.00 |
+|  clk_125mhz_IBUF_BUFG |                                 | reset             |                3 |              3 |         1.00 |
+|  clk_125mhz_IBUF_BUFG | sel                             |                   |                1 |              4 |         4.00 |
+|  clk_125mhz_IBUF_BUFG | rx/bit_index                    |                   |                1 |              4 |         4.00 |
+|  clk_125mhz_IBUF_BUFG | tx/bit_index                    | tx/out_tx_serial0 |                1 |              4 |         4.00 |
+|  clk_125mhz_IBUF_BUFG | uut/FSM_onehot_state[4]_i_1_n_0 | reset             |                2 |              5 |         2.50 |
+|  clk_125mhz_IBUF_BUFG | tx_byte                         |                   |                6 |              8 |         1.33 |
+|  clk_125mhz_IBUF_BUFG | uut/temp_data[7]_i_1_n_0        | reset             |                5 |              8 |         1.60 |
+|  clk_125mhz_IBUF_BUFG | rx/out_rx_byte[7]_i_1_n_0       |                   |                5 |              8 |         1.60 |
 |  clk_125mhz_IBUF_BUFG | tx/tx_data                      |                   |                2 |              8 |         4.00 |
-|  clk_125mhz_IBUF_BUFG | rx/clk_count                    |                   |                6 |             11 |         1.83 |
-|  clk_125mhz_IBUF_BUFG | tx/out_tx_serial_i_2_n_0        | tx/out_tx_serial0 |                4 |             12 |         3.00 |
-|  clk_125mhz_IBUF_BUFG | uut/counter_x[15]_i_1_n_0       | uut/AR[0]         |                4 |             16 |         4.00 |
-|  clk_125mhz_IBUF_BUFG | uut/counter_y[15]_i_1_n_0       | uut/AR[0]         |                7 |             16 |         2.29 |
-|  clk_125mhz_IBUF_BUFG | rx/E[0]                         | uut/AR[0]         |                4 |             16 |         4.00 |
-|  clk_125mhz_IBUF_BUFG | tx/FSM_onehot_state_reg[0][0]   | uut/AR[0]         |                4 |             16 |         4.00 |
+|  clk_125mhz_IBUF_BUFG | rx/E[0]                         | reset             |                5 |              9 |         1.80 |
+|  clk_125mhz_IBUF_BUFG | rx/clk_count                    |                   |                3 |             11 |         3.67 |
+|  clk_125mhz_IBUF_BUFG |                                 |                   |               10 |             12 |         1.20 |
+|  clk_125mhz_IBUF_BUFG | tx/out_tx_serial_i_2_n_0        | tx/out_tx_serial0 |                3 |             12 |         4.00 |
+|  clk_125mhz_IBUF_BUFG | uut/counter_x[15]_i_1_n_0       | reset             |                5 |             16 |         3.20 |
+|  clk_125mhz_IBUF_BUFG | uut/counter_y[15]_i_1_n_0       | reset             |                4 |             16 |         4.00 |
+|  clk_125mhz_IBUF_BUFG | rx/out_rx_dv_reg_0[0]           | reset             |                3 |             16 |         5.33 |
+|  clk_125mhz_IBUF_BUFG | tx/E[0]                         | reset             |                3 |             16 |         5.33 |
 +-----------------------+---------------------------------+-------------------+------------------+----------------+--------------+
 
 

@@ -1,8 +1,8 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2023.1 (win64) Build 3865809 Sun May  7 15:05:29 MDT 2023
-| Date             : Tue Nov 18 10:20:20 2025
-| Host             : DESKTOP-7IUMTM5 running 64-bit major release  (build 9200)
+| Date             : Tue Nov 18 14:30:08 2025
+| Host             : DESKTOP-R8IJURE running 64-bit major release  (build 9200)
 | Command          : report_power -file top_module_power_routed.rpt -pb top_module_power_summary_routed.pb -rpx top_module_power_routed.rpx
 | Design           : top_module
 | Device           : xc7z020clg400-1
@@ -30,14 +30,14 @@ Table of Contents
 ----------
 
 +--------------------------+--------------+
-| Total On-Chip Power (W)  | 0.166        |
+| Total On-Chip Power (W)  | 0.120        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
-| Dynamic (W)              | 0.058        |
+| Dynamic (W)              | 0.013        |
 | Device Static (W)        | 0.108        |
 | Effective TJA (C/W)      | 11.5         |
-| Max Ambient (C)          | 83.1         |
-| Junction Temperature (C) | 26.9         |
+| Max Ambient (C)          | 83.6         |
+| Junction Temperature (C) | 26.4         |
 | Confidence Level         | Low          |
 | Setting File             | ---          |
 | Simulation Activity File | ---          |
@@ -53,16 +53,16 @@ Table of Contents
 | On-Chip        | Power (W) | Used     | Available | Utilization (%) |
 +----------------+-----------+----------+-----------+-----------------+
 | Clocks         |     0.004 |        3 |       --- |             --- |
-| Slice Logic    |    <0.001 |      542 |       --- |             --- |
-|   LUT as Logic |    <0.001 |      225 |     53200 |            0.42 |
+| Slice Logic    |    <0.001 |      560 |       --- |             --- |
+|   LUT as Logic |    <0.001 |      221 |     53200 |            0.42 |
 |   CARRY4       |    <0.001 |       28 |     13300 |            0.21 |
-|   Register     |    <0.001 |      158 |    106400 |            0.15 |
+|   Register     |    <0.001 |      168 |    106400 |            0.16 |
 |   Others       |     0.000 |       56 |       --- |             --- |
-| Signals        |     0.002 |      482 |       --- |             --- |
-| Block RAM      |     0.049 |       32 |       140 |           22.86 |
+| Signals        |     0.001 |      498 |       --- |             --- |
+| Block RAM      |     0.004 |       32 |       140 |           22.86 |
 | I/O            |     0.002 |        7 |       125 |            5.60 |
 | Static Power   |     0.108 |          |           |                 |
-| Total          |     0.166 |          |           |                 |
+| Total          |     0.120 |          |           |                 |
 +----------------+-----------+----------+-----------+-----------------+
 
 
@@ -72,20 +72,20 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+-------------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) | Powerup (A) | Budget (A)  | Margin (A) |
 +-----------+-------------+-----------+-------------+------------+-------------+-------------+------------+
-| Vccint    |       1.000 |     0.059 |       0.051 |      0.008 |       NA    | Unspecified | NA         |
+| Vccint    |       1.000 |     0.018 |       0.010 |      0.008 |       NA    | Unspecified | NA         |
 | Vccaux    |       1.800 |     0.010 |       0.000 |      0.010 |       NA    | Unspecified | NA         |
-| Vcco33    |       3.300 |     0.001 |       0.000 |      0.001 |       NA    | Unspecified | NA         |
+| Vcco33    |       3.300 |     0.002 |       0.001 |      0.001 |       NA    | Unspecified | NA         |
 | Vcco25    |       2.500 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | Vcco18    |       1.800 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | Vcco15    |       1.500 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | Vcco135   |       1.350 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | Vcco12    |       1.200 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | Vccaux_io |       1.800 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
-| Vccbram   |       1.000 |     0.006 |       0.004 |      0.002 |       NA    | Unspecified | NA         |
+| Vccbram   |       1.000 |     0.002 |       0.000 |      0.002 |       NA    | Unspecified | NA         |
 | MGTAVcc   |       1.000 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | MGTAVtt   |       1.200 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | MGTVccaux |       1.800 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
-| Vccpint   |       1.000 |     0.017 |       0.000 |      0.017 |       NA    | Unspecified | NA         |
+| Vccpint   |       1.000 |     0.016 |       0.000 |      0.016 |       NA    | Unspecified | NA         |
 | Vccpaux   |       1.800 |     0.010 |       0.000 |      0.010 |       NA    | Unspecified | NA         |
 | Vccpll    |       1.800 |     0.003 |       0.000 |      0.003 |       NA    | Unspecified | NA         |
 | Vcco_ddr  |       1.500 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
@@ -148,14 +148,14 @@ Table of Contents
 +------------------------+-----------+
 | Name                   | Power (W) |
 +------------------------+-----------+
-| top_module             |     0.058 |
-|   uut                  |     0.003 |
-|   uuut                 |     0.005 |
-|     U0                 |     0.005 |
-|       inst_blk_mem_gen |     0.005 |
-|   uuuut                |     0.044 |
-|     U0                 |     0.044 |
-|       inst_blk_mem_gen |     0.044 |
+| top_module             |     0.013 |
+|   uut                  |     0.002 |
+|   uuut                 |     0.002 |
+|     U0                 |     0.002 |
+|       inst_blk_mem_gen |     0.002 |
+|   uuuut                |     0.003 |
+|     U0                 |     0.003 |
+|       inst_blk_mem_gen |     0.003 |
 +------------------------+-----------+
 
 

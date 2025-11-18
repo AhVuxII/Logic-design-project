@@ -3,12 +3,12 @@
 # SW Build 3865809 on Sun May  7 15:05:29 MDT 2023
 # IP Build 3864474 on Sun May  7 20:36:21 MDT 2023
 # SharedData Build 3865790 on Sun May 07 13:33:03 MDT 2023
-# Start of session at: Tue Nov 18 10:17:11 2025
-# Process ID: 11916
-# Current directory: D:/VIVADO workspace/image_rotate/image_rotate.runs/synth_1
+# Start of session at: Tue Nov 18 14:28:13 2025
+# Process ID: 6580
+# Current directory: F:/VIVADO WORKSPACE/image_rotate/image_rotate.runs/synth_1
 # Command line: vivado.exe -log top_module.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source top_module.tcl
-# Log file: D:/VIVADO workspace/image_rotate/image_rotate.runs/synth_1/top_module.vds
-# Journal file: D:/VIVADO workspace/image_rotate/image_rotate.runs/synth_1\vivado.jou
-# Running On: DESKTOP-7IUMTM5, OS: Windows, CPU Frequency: 2096 MHz, CPU Physical cores: 8, Host memory: 23556 MB
+# Log file: F:/VIVADO WORKSPACE/image_rotate/image_rotate.runs/synth_1/top_module.vds
+# Journal file: F:/VIVADO WORKSPACE/image_rotate/image_rotate.runs/synth_1\vivado.jou
+# Running On: DESKTOP-R8IJURE, OS: Windows, CPU Frequency: 2496 MHz, CPU Physical cores: 8, Host memory: 34218 MB
 #-----------------------------------------------------------
 source top_module.tcl -notrace

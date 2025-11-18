@@ -27,7 +27,7 @@ module top_module #(
 )
 (
     input clk_125mhz,
-    input BTN1, // reset button
+    input BTN1, // start button
     input [1:0] SW, // mode button
     input uart_rx,
     output uart_tx,
@@ -38,7 +38,18 @@ module top_module #(
     localparam addr_size = $clog2(img_size);
         
     wire clk = clk_125mhz;
-    wire reset = !BTN1; // active low (reset when pressed)
+    //wire reset = !BTN1; // active low (reset when pressed)
+    reg [3:0] reset_counter = 0;
+    reg reset = 1;
+    // hold BTN1 for 16 clock cycles to reset
+    always @(posedge clk) begin
+        if (reset_counter < 15) begin
+            reset_counter <= reset_counter + 1;
+            reset <= 1;
+        end else begin
+            reset <= 0;
+        end
+    end
     
     wire rotate_done;
     wire [7:0] data_in_A;
@@ -54,11 +65,13 @@ module top_module #(
     reg [3:0] state;
     localparam IDLE = 4'd0;
     localparam RECEIVE = 4'd1;
-    localparam ROTATE_START = 4'd2;
-    localparam ROTATE_WAIT = 4'd3;
-    localparam SEND = 4'd4;
-    localparam WAIT_TX = 4'd5;
-    localparam SEND_WAIT_BRAM = 4'd6;
+    localparam WAIT_START = 4'd2;  // wait for BTN1 press
+    localparam ROTATE_START = 4'd3;
+    localparam ROTATE_WAIT = 4'd4;
+    localparam SEND_ADDR = 4'd5;   
+    localparam SEND_WAIT_BRAM = 4'd6; // Wait for BRAM latency
+    localparam SEND_TX = 4'd7;     
+    localparam WAIT_TX = 4'd8;
     
     reg [addr_size-1 :0] rx_counter;
     reg [addr_size-1 :0] tx_counter;
@@ -71,6 +84,18 @@ module top_module #(
     wire tx_active;
     wire tx_done;
     
+    // debouncer
+    reg btn1_sync1, btn1_sync2, btn1_sync3;
+    wire btn1_pressed;
+    
+    always @(posedge clk) begin
+        btn1_sync1 <= BTN1;
+        btn1_sync2 <= btn1_sync1;
+        btn1_sync3 <= btn1_sync2;
+    end
+    assign btn1_pressed = btn1_sync2 && !btn1_sync3; // button pressed
+    
+    // FSM
     always @(posedge clk or posedge reset) begin
         if (reset) begin
             state <= IDLE;
@@ -96,15 +121,19 @@ module top_module #(
                 
                 RECEIVE: begin
                     if (rx_dv) begin
-                        if (rx_counter == (img_size - 1)) begin
-                            state <= ROTATE_START;
-                        end
-                        else begin
-                            rx_counter <= rx_counter + 1;
+                        rx_counter <= rx_counter + 1;
+                        if (rx_counter == (img_size - 2)) begin
+                            state <= WAIT_START;
                         end
                     end
                 end
-            
+                
+                WAIT_START: begin
+                    if (btn1_pressed) begin
+                        state <= ROTATE_START;
+                    end
+                end
+                
                 ROTATE_START: begin
                     rotate_start <= 1;
                     state <= ROTATE_WAIT;
@@ -112,16 +141,20 @@ module top_module #(
                 
                 ROTATE_WAIT: begin
                     if (rotate_done) begin
-                        state <= SEND;
+                        state <= SEND_ADDR;
                     end
                 end
                 
-                SEND: begin
+                SEND_ADDR: begin
                     rd_en_B_uart <= 1;
                     state <= SEND_WAIT_BRAM;
                 end
                 
                 SEND_WAIT_BRAM: begin
+                    state <= SEND_TX; // wait 1 cycle for BRAM read latency
+                end
+                
+                SEND_TX: begin
                     tx_byte <= data_in_B;
                     tx_dv <= 1;
                     state <= WAIT_TX;
@@ -134,7 +167,7 @@ module top_module #(
                         end
                         else begin
                             tx_counter <= tx_counter + 1;
-                            state <= SEND;
+                            state <= SEND_ADDR;
                         end
                     end
                 end
@@ -143,7 +176,7 @@ module top_module #(
         end
     end
     
-    assign LD0 = rotate_done; // turn on LED after done rotating
+    assign LD0 = (state == WAIT_START) || rotate_done; // turn on LED after done rotating
     
     // IMAGE_ROTATE MODULE
     image_rotate #(
@@ -162,7 +195,7 @@ module top_module #(
         .wr_en(wr_en_B)
     );
     
-    // BRAM_IN MODULE
+    // BRAM_IN MODULE (original img)
     bram_in uuut (
         .clka(clk),
         .ena(rx_dv),
@@ -176,7 +209,7 @@ module top_module #(
         .doutb(data_in_A)
     );
     
-    // BRAM_OUT MODULE
+    // BRAM_OUT MODULE (rotated img)
     bram_out uuuut (
         .clka(clk),
         .ena(wr_en_B),
@@ -191,7 +224,9 @@ module top_module #(
     );
     
     // UART_RX MODULE
-    uart_rx rx (
+    uart_rx #(
+        .clk_per_bit(1085)
+    ) rx (
         .clk(clk),
         .in_rx_serial(uart_rx),
         .out_rx_byte(rx_byte),
@@ -199,7 +234,9 @@ module top_module #(
     );
     
     // UART_TX MODULE
-    uart_tx tx(
+    uart_tx #(
+        .clk_per_bit(1085)
+    ) tx (
         .clk(clk),
         .in_tx_byte(tx_byte),
         .in_tx_dv(tx_dv),
