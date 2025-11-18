@@ -41,7 +41,7 @@ module image_rotate #(
     
     // new img
     output reg [7 :0] data_out, // send new img pixel out after process
-    output reg [7 :0] addr_B, // pixel's location for writing
+    output reg [addr_size-1 :0] addr_B, // pixel's location for writing
     output reg wr_en
  );
   
@@ -63,7 +63,7 @@ module image_rotate #(
     reg [addr_size-1 :0] counter_x;
     reg [addr_size-1 :0] counter_y;
     reg [7 :0] temp_data; // store pixels read from RAM (FIFO/buffer)
-    reg done_reg;
+    //reg done_reg;
     
     reg [addr_size-1 :0] x_new;
     reg [addr_size-1 :0] y_new;
@@ -123,10 +123,10 @@ module image_rotate #(
             counter_x <= 0;
             counter_y <= 0;
             temp_data <= 0;
-            done_reg <= 0;
+            //done_reg <= 0;
         end
         else begin
-            done_reg <= 0;
+            //done_reg <= 0;
             case (state)
                 INIT: begin
                     if (start) begin
@@ -152,12 +152,12 @@ module image_rotate #(
                 end
                 
                 DONE: begin
-                    done_reg <= 1;
+                    //done_reg <= 1;
                 end
             endcase
           end
       end
-        assign done = done_reg;
+        assign done = (state == DONE);
       
         // 2. ADDRESS GENERATOR
       assign img_done = (counter_x == img_x - 1) && (counter_y == img_y - 1); // img_done when at the last row and column

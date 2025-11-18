@@ -51,13 +51,14 @@ module top_module #(
     wire [addr_size-1 :0] addr_B_read;
     
     reg rd_en_B_uart;
-    reg [2:0] state;
-    localparam IDLE = 3'd0;
-    localparam RECEIVE = 3'd1;
-    localparam ROTATE_START = 3'd2;
-    localparam ROTATE_WAIT = 3'd3;
-    localparam SEND = 3'd4;
-    localparam WAIT_TX = 3'd5;
+    reg [3:0] state;
+    localparam IDLE = 4'd0;
+    localparam RECEIVE = 4'd1;
+    localparam ROTATE_START = 4'd2;
+    localparam ROTATE_WAIT = 4'd3;
+    localparam SEND = 4'd4;
+    localparam WAIT_TX = 4'd5;
+    localparam SEND_WAIT_BRAM = 4'd6;
     
     reg [addr_size-1 :0] rx_counter;
     reg [addr_size-1 :0] tx_counter;
@@ -95,7 +96,7 @@ module top_module #(
                 
                 RECEIVE: begin
                     if (rx_dv) begin
-                        if (rx_counter == 63) begin
+                        if (rx_counter == (img_size - 1)) begin
                             state <= ROTATE_START;
                         end
                         else begin
@@ -117,6 +118,10 @@ module top_module #(
                 
                 SEND: begin
                     rd_en_B_uart <= 1;
+                    state <= SEND_WAIT_BRAM;
+                end
+                
+                SEND_WAIT_BRAM: begin
                     tx_byte <= data_in_B;
                     tx_dv <= 1;
                     state <= WAIT_TX;
@@ -142,7 +147,7 @@ module top_module #(
     
     // IMAGE_ROTATE MODULE
     image_rotate #(
-        .img_x(8), .img_y(8), .data(8)
+        .img_x(img_x), .img_y(img_y), .data(data)
     ) uut (
         .clk(clk),
         .reset(reset),

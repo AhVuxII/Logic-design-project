@@ -2,7 +2,7 @@
 -- Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2023.1 (win64) Build 3865809 Sun May  7 15:05:29 MDT 2023
--- Date        : Fri Nov 14 19:15:23 2025
+-- Date        : Fri Nov 14 18:38:30 2025
 -- Host        : DESKTOP-R8IJURE running 64-bit major release  (build 9200)
 -- Command     : write_vhdl -force -mode synth_stub -rename_top bram_in -prefix
 --               bram_in_ bram_in_stub.vhdl

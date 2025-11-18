@@ -49,17 +49,21 @@ module uart_rx #(
                 bit_index <= 0;
                 
                 if (in_rx_serial == 0) begin
+                    clk_count <= clk_count + 1;
                     state <= RX_START;
                 end
             end
             
             RX_START: begin
-                if (clk_count == (clk_per_bit / 2)) begin
+                if (clk_count < (clk_per_bit / 2)) begin
+                    clk_count <= clk_count + 1;
+                end
+                else if (clk_count == (clk_per_bit / 2)) begin
                     if (in_rx_serial == 0) begin
                         clk_count <= 0;
                         state <= RX_DATA;
                     end else begin
-                        state <= IDLE;
+                        state <= IDLE; // if glitch
                     end
                 end
             end
@@ -67,12 +71,17 @@ module uart_rx #(
             RX_DATA: begin
                 if (clk_count < clk_per_bit - 1) begin
                     clk_count <= clk_count + 1;
+                    
+                    if (clk_count == (clk_per_bit / 2)) begin
+                        rx_data[bit_index] <= in_rx_serial;
+                    end
                 end else begin
                     clk_count <= 0;
-                    rx_data[bit_index] <= in_rx_serial;
-                    bit_index <= bit_index + 1;
+                    //rx_data[bit_index] <= in_rx_serial;
                     if (bit_index == 7) begin
-                        state <= RX_STOP;
+                        state <= RX_STOP; // received 8 bits
+                    end else begin
+                        bit_index <= bit_index + 1; // prepare for next bit
                     end
                 end
             end
@@ -84,6 +93,7 @@ module uart_rx #(
                     out_rx_byte <= rx_data;
                     out_rx_dv <= 1;
                     state <= IDLE;
+                    clk_count <= 0;
                 end
             end
             

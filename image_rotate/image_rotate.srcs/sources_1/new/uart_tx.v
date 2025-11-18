@@ -72,6 +72,19 @@ module uart_tx #(
                 end
             end
             
+            TX_DATA: begin
+                out_tx_serial <= tx_data[bit_index];
+                if (clk_count < clk_per_bit - 1) begin
+                    clk_count <= clk_count + 1;
+                end
+                else begin
+                    clk_count <= 0;
+                    bit_index <= bit_index + 1;
+                    if (bit_index == 9) begin // da gui xong bit 7
+                        state <= TX_STOP;
+                    end
+                end
+            end
             TX_STOP: begin
                 out_tx_serial <= tx_data[bit_index]; // stop
                 if (clk_count < clk_per_bit - 1) begin

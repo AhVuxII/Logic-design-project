@@ -5,7 +5,7 @@ from PIL import Image # pillow library for image processing
 import time
 
 img_size = 256
-com_port = 'COM'  # thay đổi sau
+com_port = 'COM4'  # thay đổi sau
 baud_rate = 115200
 
 def load_image(filename, size):
@@ -21,21 +21,22 @@ def main():
     try:
         ser = serial.Serial(com_port, baud_rate, timeout=20)
         print(f"opened port: {com_port}. Sending {len(image_bytes)} bytes to FPGA...")
-        print("press RESET (BTN1) to start")
+        
 
         # gửi ảnh gốc đến FPGA
         time.sleep(2)  # chờ FPGA sẵn sàng sau khi reset
         ser.write(image_bytes)
         print("image sent. waiting for processed image from FPGA...")
+        print("press RESET (BTN1) to start")
 
         result_bytes = ser.read(img_size * img_size)
-
+        
         if len(result_bytes) != img_size * img_size:
             print(f"error: expected {img_size * img_size} from FPGA")
             ser.close()
             return
         
-        print("received processed image from FPGA. displaying...")
+        print("received processed image from FPGA. Displaying...")
         ser.close()
 
         result_list = [int(b) for b in result_bytes]
