@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="synth_1" LaunchPart="xc7z020clg400-1" LaunchTime="1763612319" LaunchIncrCheckpoint="$PSRCDIR/utils_1/imports/synth_1/top_module.dcp">
+<GenRun Id="synth_1" LaunchPart="xc7z020clg400-1" LaunchTime="1763643035" LaunchIncrCheckpoint="$PSRCDIR/utils_1/imports/synth_1/top_module.dcp">
   <File Type="PA-TCL" Name="top_module.tcl"/>
   <File Type="RDS-PROPCONSTRS" Name="top_module_drc_synth.rpt"/>
   <File Type="REPORTS-TCL" Name="top_module_reports.tcl"/>
@@ -33,20 +33,6 @@
       </FileInfo>
     </File>
     <File Path="$PSRCDIR/sources_1/new/top_module.v">
-      <FileInfo>
-        <Attr Name="UsedIn" Val="synthesis"/>
-        <Attr Name="UsedIn" Val="implementation"/>
-        <Attr Name="UsedIn" Val="simulation"/>
-      </FileInfo>
-    </File>
-    <File Path="$PSRCDIR/sources_1/ip/bram_out/bram_out.xci">
-      <FileInfo>
-        <Attr Name="UsedIn" Val="synthesis"/>
-        <Attr Name="UsedIn" Val="implementation"/>
-        <Attr Name="UsedIn" Val="simulation"/>
-      </FileInfo>
-    </File>
-    <File Path="$PSRCDIR/sources_1/ip/bram_in/bram_in.xci">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
@@ -89,4 +75,6 @@
     <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2023"/>
     <Step Id="synth_design"/>
   </Strategy>
+  <BlockFileSet Type="BlockSrcs" Name="bram_in"/>
+  <BlockFileSet Type="BlockSrcs" Name="bram_out"/>
 </GenRun>

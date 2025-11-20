@@ -35,12 +35,12 @@ module image_rotate #(
     output done,
     
     // original img
-    input [7 :0] data_in, // send original img pixel in to process
+    input [data - 1 :0] data_in, // send original img pixel in to process
     output reg [addr_size-1 :0] addr_A,// pixel's location for reading
     output reg rd_en,
     
     // new img
-    output reg [7 :0] data_out, // send new img pixel out after process
+    output reg [data - 1 :0] data_out, // send new img pixel out after process
     output reg [addr_size-1 :0] addr_B, // pixel's location for writing
     output reg wr_en
  );
@@ -54,7 +54,7 @@ module image_rotate #(
         // 1. CONTROLLER FSM
     localparam INIT = 3'b000;
     localparam READ = 3'b001;
-    localparam WAIT_READ = 3'b010; // wait for RAM to return the data
+    localparam WAIT_READ = 3'b010; // wait for BRAM to return the data
     localparam WRITE_NEXT = 3'b011;
     localparam DONE = 3'b100;
     
@@ -62,7 +62,7 @@ module image_rotate #(
     reg [2:0] state, next_state;
     reg [addr_size-1 :0] counter_x;
     reg [addr_size-1 :0] counter_y;
-    reg [7 :0] temp_data; // store pixels read from RAM (FIFO/buffer)
+    reg [data - 1 :0] temp_data; // store pixels read from RAM (FIFO/buffer)
     //reg done_reg;
     
     reg [addr_size-1 :0] x_new;

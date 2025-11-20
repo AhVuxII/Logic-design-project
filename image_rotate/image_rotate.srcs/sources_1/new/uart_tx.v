@@ -1,107 +1,153 @@
-`timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
-// Create Date: 11/12/2025 04:17:26 PM
-// Design Name: 
-// Module Name: uart_tx
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
-// 
-// Dependencies: 
-// 
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-// 
-//////////////////////////////////////////////////////////////////////////////////
-
-
-module uart_tx #(
-    parameter clk_per_bit = 13020 // 125MHz clock / 9600 baud = 13020
-)
-(
-    input clk,
-    input [7:0] in_tx_byte, // byte can de gui
-    input in_tx_dv, // lenh bat dau gui
-    output reg out_tx_active,
-    output reg out_tx_serial,
-    output reg out_tx_done
-);
-
-    reg [3:0] state;
-    reg [10:0] clk_count;
-    reg [3:0] bit_index;
-    reg [9:0] tx_data;
+module uart_tx 
+    /* BEGIN PARAMETERS LIST */
+    #(
+        parameter TICKS_PER_BIT = 1085,      // 125MHz / 9600 = 13020
+        parameter TICKS_PER_BIT_SIZE = 11     // C?n 14 bit ?? ch?a s? 13020
+    )
+    /* END PARAMETERS LIST */ 
     
-    localparam IDLE = 4'd0;
-    localparam TX_START = 4'd1;
-    localparam TX_DATA = 4'd2;
-    localparam TX_STOP = 4'd3;
-    localparam TX_CLEAN = 4'd4;
+    /* BEGIN MODULE IO LIST */
+    (
+        input i_clk,
+        input i_rst,          // <--- ?ã thêm c?ng Reset ?? n?i v?i BTN1
+        input i_start,
+        input [7:0] i_data,
+        output wire o_done,
+        output wire o_busy,
+        output wire o_dout
+    );
+    /* END MODULE IO LIST */
+
+    localparam  STATE_IDLE          = 5'b00001,
+                STATE_SEND_START    = 5'b00010,
+                STATE_SEND_BITS     = 5'b00100,
+                STATE_SEND_STOP     = 5'b01000,
+                STATE_DONE          = 5'b10000;
     
-    always @(posedge clk) begin
-        out_tx_done <= 0;
-        
-        case (state)
-            IDLE: begin
-                out_tx_serial <= 1;
-                out_tx_active <= 0;
-                clk_count <= 0;
-                bit_index <= 0;
+    reg [4:0] currentState, nextState;
+    reg done_flag;
+    reg busy_flag;
+    reg tx_output;
+    
+    assign o_dout = tx_output;
+    assign o_done = done_flag;
+    assign o_busy = busy_flag;
+    
+    reg [7:0] tx_reg;
+    reg [3:0] tx_bit_counter;
+    reg [TICKS_PER_BIT_SIZE-1:0] ticks_counter;
+
+    wire ticks_counter_ovf      = (ticks_counter == TICKS_PER_BIT-1);
+    wire tx_bit_counter_ovf     = (tx_bit_counter[3]); // if equals >= 8
+
+    //Init registers for testbench simulation
+    initial begin
+        currentState = STATE_IDLE;
+        tx_reg = 0;
+        tx_bit_counter = 0;
+        ticks_counter = 0;
+    end
+    
+    always @(*) begin
+        case(currentState)
+
+            default: begin 
+                nextState = STATE_IDLE;
+                done_flag = 0;
+                busy_flag = 0;
+                tx_output = 1; //idle line
+            end
+
+            STATE_IDLE: begin 
+                done_flag = 0;
+                busy_flag = 0;
+                tx_output = 1; //idle line
                 
-                if (in_tx_dv) begin
-                    tx_data <= {1'b1, in_tx_byte, 1'b0};
-                    state <= TX_START;
-                    out_tx_active <= 1;
-                end
-            end
+                if(i_start)
+                    nextState = STATE_SEND_START;
+                else
+                    nextState = STATE_IDLE;
+            end 
             
-            TX_START: begin
-                out_tx_serial <= tx_data[bit_index]; // start
-                if (clk_count < clk_per_bit - 1) begin
-                    clk_count <= clk_count + 1;
-                end
-                else begin
-                    clk_count <= 0;
-                    bit_index <= bit_index + 1;
-                    state <= TX_DATA;
-                end
-            end
+            STATE_SEND_START: begin 
+                done_flag = 0;
+                busy_flag = 1;
+                tx_output = 0; //send low signal (start)
+                
+                if(ticks_counter_ovf)
+                    nextState = STATE_SEND_BITS;
+                else
+                    nextState = STATE_SEND_START;
+            end 
             
-            TX_DATA: begin
-                out_tx_serial <= tx_data[bit_index];
-                if (clk_count < clk_per_bit - 1) begin
-                    clk_count <= clk_count + 1;
-                end
-                else begin
-                    clk_count <= 0;
-                    bit_index <= bit_index + 1;
-                    if (bit_index == 9) begin // da gui xong bit 7
-                        state <= TX_STOP;
-                    end
-                end
-            end
-            TX_STOP: begin
-                out_tx_serial <= tx_data[bit_index]; // stop
-                if (clk_count < clk_per_bit - 1) begin
-                    clk_count <= clk_count + 1;
-                end
-                else begin
-                    clk_count <= 0;
-                    state <= TX_CLEAN;
-                end
-            end
+            STATE_SEND_BITS: begin 
+                done_flag = 0;
+                busy_flag = 1;
+                tx_output = tx_bit_counter_ovf ? 1'b1 : tx_reg[0];
+                
+                if(tx_bit_counter_ovf)
+                    nextState = STATE_SEND_STOP;
+                else
+                    nextState = STATE_SEND_BITS;
+            end 
             
-            TX_CLEAN: begin
-                out_tx_done <= 1; // done
-                state <= IDLE;
-            end
+            STATE_SEND_STOP: begin 
+                done_flag = 0;
+                busy_flag = 1;
+                tx_output = 1; //send high signal (stop)
+                
+                if(ticks_counter_ovf)
+                    nextState = STATE_DONE;
+                else
+                    nextState = STATE_SEND_STOP;
+            end 
             
-            default: state <= IDLE;
+            STATE_DONE: begin 
+                done_flag = 1;
+                busy_flag = 1;
+                tx_output = 1; //idle line
+                nextState = STATE_IDLE;
+            end 
         endcase
-     end
+    end
+    
+    // Thêm Reset vào ?ây ?? m?ch ?n ??nh
+    always @(posedge i_clk or posedge i_rst) begin 
+        if (i_rst) begin
+            currentState <= STATE_IDLE;
+            ticks_counter <= 0;
+            tx_bit_counter <= 0;
+            tx_reg <= 0;
+        end
+        else begin
+            currentState <= nextState;
+
+            //Any of those states require the 'ticks_counter_ovf' signal to work
+            if (currentState == STATE_SEND_START || 
+                currentState == STATE_SEND_BITS || 
+                currentState == STATE_SEND_STOP) begin
+                
+                if(ticks_counter_ovf) begin
+                    ticks_counter <= 0;
+                end 
+                else 
+                    ticks_counter <= ticks_counter + 1;
+            end
+            
+            if (currentState == STATE_SEND_BITS) begin 
+                if(ticks_counter_ovf) begin
+                    tx_bit_counter <= tx_bit_counter + 1;
+                    tx_reg <= tx_reg >> 1; //LSB shift
+                end
+            end
+
+            if(currentState == STATE_IDLE) begin 
+                if(i_start) begin 
+                    tx_reg <= i_data;
+                    tx_bit_counter <= 0;
+                end
+            end
+        end
+    end
+
 endmodule

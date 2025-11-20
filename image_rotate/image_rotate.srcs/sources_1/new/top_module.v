@@ -67,14 +67,14 @@ module top_module #(
     reg rd_en_B_uart;
     reg [3:0] state;
     localparam IDLE = 4'd0;
-    localparam RECEIVE = 4'd1;
+    // localparam RECEIVE = 4'd1;
    // localparam WAIT_START = 4'd2;  // wait for BTN1 press
-    localparam ROTATE_START = 4'd3;
-    localparam ROTATE_WAIT = 4'd4;
-    localparam SEND_ADDR = 4'd5;   
-    localparam SEND_WAIT_BRAM = 4'd6; // Wait for BRAM latency
-    localparam SEND_TX = 4'd7;     
-    localparam WAIT_TX = 4'd8;
+    localparam ROTATE_START = 4'd2;
+    localparam ROTATE_WAIT = 4'd3;
+    localparam SEND_ADDR = 4'd4;   
+    localparam SEND_WAIT_BRAM = 4'd5; // Wait for BRAM latency
+    localparam SEND_TX = 4'd6;     
+    localparam WAIT_TX = 4'd7;
     
     reg [addr_size-1 :0] rx_counter;
     reg [addr_size-1 :0] tx_counter;
@@ -117,11 +117,12 @@ module top_module #(
                 IDLE: begin
                     rx_counter <= 0;
                     tx_counter <= 0;
-                    if (rx_dv && rx_byte == 8'hAA) begin
-                        state <= RECEIVE;
+                    if (rx_dv /*&& rx_byte == 8'hAA*/) begin
+                        state <= ROTATE_START;
                     end
                 end
                 
+                /*
                 RECEIVE: begin
                     if (rx_dv) begin
                         rx_counter <= rx_counter + 1;
@@ -130,6 +131,7 @@ module top_module #(
                         end
                     end
                 end
+                */
                 
             /*    WAIT_START: begin
                     if (btn1_pressed) begin
@@ -179,10 +181,10 @@ module top_module #(
         end
     end
     
-    assign LD0 = (state != IDLE);           // sáng khi ?ang b?n
-    assign LD1 = rx_counter[13];            // nh?p nháy nhanh khi ?ang nh?n
-    assign LD2 = rx_counter[14];            // nh?p nháy ch?m h?n
-    assign LD3 = rx_counter[15];            // sáng lên khi nh?n ???c > 50% ?nh
+    assign LD0 = state[0];          // sáng khi ?ang b?n
+    assign LD1 = state[1];           // nh?p nháy nhanh khi ?ang nh?n
+    assign LD2 = state[2];           // nh?p nháy ch?m h?n
+    assign LD3 = state[3];            // sáng lên khi nh?n ???c > 50% ?nh
     
     // IMAGE_ROTATE MODULE
     image_rotate #(
@@ -204,10 +206,10 @@ module top_module #(
     // BRAM_IN MODULE (original img)
     bram_in uuut (
         .clka(clk),
-        .ena(rx_dv),
-        .wea(rx_dv),
-        .addra(rx_counter),
-        .dina(rx_byte),
+        .ena(1'b0),
+        .wea(1'b0),
+        .addra(0),
+        .dina(0),
         
         .clkb(clk),
         .enb(rd_en_A),
@@ -231,23 +233,30 @@ module top_module #(
     
     // UART_RX MODULE
     uart_rx #(
-        .clk_per_bit(13020)
+        .TICKS_PER_BIT(1085),      // 125MHz / 9600 = 13020
+        .TICKS_PER_BIT_SIZE(11)     // need 11 bits for 1085
     ) rx (
-        .clk(clk),
-        .in_rx_serial(uart_rx),
-        .out_rx_byte(rx_byte),
-        .out_rx_dv(rx_dv)
+        .i_clk(clk),
+        .i_enable(1'b1),            // always enable
+        .i_din(uart_rx),            // 
+        
+        .o_rxdata(rx_byte),         // 
+        .o_recvdata(rx_dv),         // 
+        .o_busy()                   // 
     );
     
     // UART_TX MODULE
     uart_tx #(
-        .clk_per_bit(13020)
+        .TICKS_PER_BIT(1085),      // 125MHz / 9600 = 13020
+        .TICKS_PER_BIT_SIZE(11)     
     ) tx (
-        .clk(clk),
-        .in_tx_byte(tx_byte),
-        .in_tx_dv(tx_dv),
-        .out_tx_active(tx_active),
-        .out_tx_serial(uart_tx),
-        .out_tx_done(tx_done)
+        .i_clk(clk),
+        .i_rst(reset),              // BTN1 to reset
+        .i_start(tx_dv),            // 
+        .i_data(tx_byte),           // 
+        
+        .o_done(tx_done),           // 
+        .o_busy(tx_active),         // 
+        .o_dout(uart_tx)            // 
     );
 endmodule

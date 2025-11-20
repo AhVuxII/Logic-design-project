@@ -5,14 +5,14 @@ Algorithm                  :     Minimum_Area
 Memory Type                :     Simple_Dual_Port_RAM
 Port A Read Width          :     [8]
 Port A Write Width         :     [8]
-Memory Depth               :     [65536]
+Memory Depth               :     [131072]
 Port B Read Width          :     [8]
 Port B Write Width         :     [8]
 
 ----------------------------------------------------------------------------------
 
 Block RAM resource(s) (18K BRAMs)    : [0]
-Block RAM resource(s) (36K BRAMs)    : [16]
+Block RAM resource(s) (36K BRAMs)    : [32]
 ----------------------------------------------------------------------------------
 Clock A Frequency          :         [100]
 Port A Enable Rate         :         [100]
