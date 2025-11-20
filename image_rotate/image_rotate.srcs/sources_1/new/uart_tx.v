@@ -21,7 +21,7 @@
 
 
 module uart_tx #(
-    parameter clk_per_bit = 1085 // 125MHz clock / 115200 baud = 1085
+    parameter clk_per_bit = 13020 // 125MHz clock / 9600 baud = 13020
 )
 (
     input clk,

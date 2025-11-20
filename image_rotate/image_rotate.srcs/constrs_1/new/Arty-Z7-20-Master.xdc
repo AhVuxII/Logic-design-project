@@ -9,13 +9,15 @@ set_property -dict { PACKAGE_PIN D20    IOSTANDARD LVCMOS33 } [get_ports { BTN1 
 
 # === Công t?c (Switches) ===
 # [cite_start]SW0 (M20) và SW1 (M19) [cite: 54-55]
-# L?u ý: File c? c?a b?n dùng T14/U12 là chân c?m ngoài (Shield), M20/M19 m?i là công t?c trên board.
 set_property -dict { PACKAGE_PIN M20    IOSTANDARD LVCMOS33 } [get_ports { SW[0] }];
 set_property -dict { PACKAGE_PIN M19    IOSTANDARD LVCMOS33 } [get_ports { SW[1] }];
 
 # === ?èn LED (LEDs) ===
 # [cite_start]LED0 (R14) báo hi?u Done [cite: 61]
-set_property -dict { PACKAGE_PIN R14    IOSTANDARD LVCMOS33 } [get_ports { LD0 }];
+set_property -dict { PACKAGE_PIN R14    IOSTANDARD LVCMOS33 } [get_ports { LD0 }]; # LED0
+set_property -dict { PACKAGE_PIN P14    IOSTANDARD LVCMOS33 } [get_ports { LD1 }]; # LED1
+set_property -dict { PACKAGE_PIN N16    IOSTANDARD LVCMOS33 } [get_ports { LD2 }]; # LED2
+set_property -dict { PACKAGE_PIN M14    IOSTANDARD LVCMOS33 } [get_ports { LD3 }]; # LED3
 
 # === UART (C?U HÌNH QUAN TR?NG) ===
 # Chúng ta s? dùng c?ng Pmod JA (Header JA) ?? k?t n?i UART

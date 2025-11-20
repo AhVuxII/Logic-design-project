@@ -21,7 +21,7 @@
 
 
 module uart_rx #(
-    parameter clk_per_bit = 1085
+    parameter clk_per_bit = 13020
 )
 (
     input clk,

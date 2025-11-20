@@ -31,7 +31,10 @@ module top_module #(
     input [1:0] SW, // mode button
     input uart_rx,
     output uart_tx,
-    output LD0
+    output LD0,
+    output LD1,
+    output LD2,
+    output LD3
 );
     
     localparam img_size = img_x * img_y;
@@ -39,8 +42,8 @@ module top_module #(
         
     wire clk = clk_125mhz;
     wire reset = BTN1; // active low (reset when pressed)
-    reg [3:0] reset_counter = 0;
-    reg reset = 1;
+    //reg [3:0] reset_counter = 0;
+    //reg reset = 1;
     // hold BTN1 for 16 clock cycles to reset
     /*always @(posedge clk) begin
         if (reset_counter < 15) begin
@@ -65,7 +68,7 @@ module top_module #(
     reg [3:0] state;
     localparam IDLE = 4'd0;
     localparam RECEIVE = 4'd1;
-    localparam WAIT_START = 4'd2;  // wait for BTN1 press
+   // localparam WAIT_START = 4'd2;  // wait for BTN1 press
     localparam ROTATE_START = 4'd3;
     localparam ROTATE_WAIT = 4'd4;
     localparam SEND_ADDR = 4'd5;   
@@ -114,7 +117,7 @@ module top_module #(
                 IDLE: begin
                     rx_counter <= 0;
                     tx_counter <= 0;
-                    if (rx_dv) begin
+                    if (rx_dv && rx_byte == 8'hAA) begin
                         state <= RECEIVE;
                     end
                 end
@@ -122,17 +125,17 @@ module top_module #(
                 RECEIVE: begin
                     if (rx_dv) begin
                         rx_counter <= rx_counter + 1;
-                        if (rx_counter == (img_size - 2)) begin
-                            state <= ROTATE_START;   //WAIT_START;
+                        if (rx_counter == (img_size - 1)) begin
+                            state <= ROTATE_START; // WAIT_START;
                         end
                     end
                 end
                 
-                WAIT_START: begin
+            /*    WAIT_START: begin
                     if (btn1_pressed) begin
                         state <= ROTATE_START;
                     end
-                end
+                end*/
                 
                 ROTATE_START: begin
                     rotate_start <= 1;
@@ -167,7 +170,7 @@ module top_module #(
                         end
                         else begin
                             tx_counter <= tx_counter + 1;
-                            //state <= SEND_ADDR;
+                            state <= SEND_ADDR;
                         end
                     end
                 end
@@ -176,7 +179,10 @@ module top_module #(
         end
     end
     
-    assign LD0 = (state == WAIT_START) || rotate_done; // turn on LED after done rotating
+    assign LD0 = (state != IDLE);           // sáng khi ?ang b?n
+    assign LD1 = rx_counter[13];            // nh?p nháy nhanh khi ?ang nh?n
+    assign LD2 = rx_counter[14];            // nh?p nháy ch?m h?n
+    assign LD3 = rx_counter[15];            // sáng lên khi nh?n ???c > 50% ?nh
     
     // IMAGE_ROTATE MODULE
     image_rotate #(
@@ -225,7 +231,7 @@ module top_module #(
     
     // UART_RX MODULE
     uart_rx #(
-        .clk_per_bit(1085)
+        .clk_per_bit(13020)
     ) rx (
         .clk(clk),
         .in_rx_serial(uart_rx),
@@ -235,7 +241,7 @@ module top_module #(
     
     // UART_TX MODULE
     uart_tx #(
-        .clk_per_bit(1085)
+        .clk_per_bit(13020)
     ) tx (
         .clk(clk),
         .in_tx_byte(tx_byte),
