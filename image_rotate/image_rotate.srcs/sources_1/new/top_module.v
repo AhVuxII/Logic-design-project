@@ -38,18 +38,18 @@ module top_module #(
     localparam addr_size = $clog2(img_size);
         
     wire clk = clk_125mhz;
-    //wire reset = !BTN1; // active low (reset when pressed)
+    wire reset = BTN1; // active low (reset when pressed)
     reg [3:0] reset_counter = 0;
     reg reset = 1;
     // hold BTN1 for 16 clock cycles to reset
-    always @(posedge clk) begin
+    /*always @(posedge clk) begin
         if (reset_counter < 15) begin
             reset_counter <= reset_counter + 1;
             reset <= 1;
         end else begin
             reset <= 0;
         end
-    end
+    end*/
     
     wire rotate_done;
     wire [7:0] data_in_A;
@@ -123,7 +123,7 @@ module top_module #(
                     if (rx_dv) begin
                         rx_counter <= rx_counter + 1;
                         if (rx_counter == (img_size - 2)) begin
-                            state <= WAIT_START;
+                            state <= ROTATE_START;   //WAIT_START;
                         end
                     end
                 end
@@ -167,7 +167,7 @@ module top_module #(
                         end
                         else begin
                             tx_counter <= tx_counter + 1;
-                            state <= SEND_ADDR;
+                            //state <= SEND_ADDR;
                         end
                     end
                 end

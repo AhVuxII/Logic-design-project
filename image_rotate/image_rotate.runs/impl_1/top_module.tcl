@@ -17,7 +17,7 @@ proc create_report { reportName command } {
   }
 }
 namespace eval ::optrace {
-  variable script "F:/VIVADO WORKSPACE/image_rotate/image_rotate.runs/impl_1/top_module.tcl"
+  variable script "D:/VIVADO_workspace/image_rotate/image_rotate.runs/impl_1/top_module.tcl"
   variable category "vivado_impl"
 }
 
@@ -122,26 +122,27 @@ start_step init_design
 set ACTIVE_STEP init_design
 set rc [catch {
   create_msg_db init_design.pb
-  set_param chipscope.maxJobs 4
-  set_param runs.launchOptions { -jobs 16  }
+  set_param chipscope.maxJobs 2
+  set_param xicom.use_bs_reader 1
+  set_param runs.launchOptions { -jobs 8  }
 OPTRACE "create in-memory project" START { }
   create_project -in_memory -part xc7z020clg400-1
   set_property design_mode GateLvl [current_fileset]
   set_param project.singleFileAddWarning.threshold 0
 OPTRACE "create in-memory project" END { }
 OPTRACE "set parameters" START { }
-  set_property webtalk.parent_dir {F:/VIVADO WORKSPACE/image_rotate/image_rotate.cache/wt} [current_project]
-  set_property parent.project_path {F:/VIVADO WORKSPACE/image_rotate/image_rotate.xpr} [current_project]
-  set_property ip_output_repo {{F:/VIVADO WORKSPACE/image_rotate/image_rotate.cache/ip}} [current_project]
+  set_property webtalk.parent_dir D:/VIVADO_workspace/image_rotate/image_rotate.cache/wt [current_project]
+  set_property parent.project_path D:/VIVADO_workspace/image_rotate/image_rotate.xpr [current_project]
+  set_property ip_output_repo D:/VIVADO_workspace/image_rotate/image_rotate.cache/ip [current_project]
   set_property ip_cache_permissions {read write} [current_project]
   set_property XPM_LIBRARIES XPM_MEMORY [current_project]
 OPTRACE "set parameters" END { }
 OPTRACE "add files" START { }
-  add_files -quiet {{F:/VIVADO WORKSPACE/image_rotate/image_rotate.runs/synth_1/top_module.dcp}}
-  read_ip -quiet {{F:/VIVADO WORKSPACE/image_rotate/image_rotate.srcs/sources_1/ip/bram_out/bram_out.xci}}
-  read_ip -quiet {{F:/VIVADO WORKSPACE/image_rotate/image_rotate.srcs/sources_1/ip/bram_in/bram_in.xci}}
+  add_files -quiet D:/VIVADO_workspace/image_rotate/image_rotate.runs/synth_1/top_module.dcp
+  read_ip -quiet D:/VIVADO_workspace/image_rotate/image_rotate.srcs/sources_1/ip/bram_out/bram_out.xci
+  read_ip -quiet D:/VIVADO_workspace/image_rotate/image_rotate.srcs/sources_1/ip/bram_in/bram_in.xci
 OPTRACE "read constraints: implementation" START { }
-  read_xdc {{F:/VIVADO WORKSPACE/image_rotate/image_rotate.srcs/constrs_1/new/Arty-Z7-20-Master.xdc}}
+  read_xdc D:/VIVADO_workspace/image_rotate/image_rotate.srcs/constrs_1/new/Arty-Z7-20-Master.xdc
 OPTRACE "read constraints: implementation" END { }
 OPTRACE "add files" END { }
 OPTRACE "link_design" START { }
