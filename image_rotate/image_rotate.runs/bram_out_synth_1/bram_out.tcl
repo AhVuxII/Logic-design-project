@@ -4,7 +4,7 @@
 
 set TIME_start [clock seconds] 
 namespace eval ::optrace {
-  variable script "F:/VIVADO WORKSPACE/testing/image_rotate/image_rotate.runs/bram_out_synth_1/bram_out.tcl"
+  variable script "D:/VIVADO_workspace/image_rotate/image_rotate.runs/bram_out_synth_1/bram_out.tcl"
   variable category "vivado_synth"
 }
 
@@ -70,8 +70,6 @@ proc create_report { reportName command } {
   }
 }
 OPTRACE "bram_out_synth_1" START { ROLLUP_AUTO }
-set_param tcl.statsThreshold 360
-set_msg_config -id {Common 17-41} -limit 10000000
 set_param project.vivado.isBlockSynthRun true
 set_msg_config -msgmgr_mode ooc_run
 OPTRACE "Creating in-memory project" START { }
@@ -81,17 +79,17 @@ set_param project.singleFileAddWarning.threshold 0
 set_param project.compositeFile.enableAutoGeneration 0
 set_param synth.vivado.isSynthRun true
 set_msg_config -source 4 -id {IP_Flow 19-2162} -severity warning -new_severity info
-set_property webtalk.parent_dir {F:/VIVADO WORKSPACE/testing/image_rotate/image_rotate.cache/wt} [current_project]
-set_property parent.project_path {F:/VIVADO WORKSPACE/testing/image_rotate/image_rotate.xpr} [current_project]
+set_property webtalk.parent_dir D:/VIVADO_workspace/image_rotate/image_rotate.cache/wt [current_project]
+set_property parent.project_path D:/VIVADO_workspace/image_rotate/image_rotate.xpr [current_project]
 set_property XPM_LIBRARIES XPM_MEMORY [current_project]
 set_property default_lib xil_defaultlib [current_project]
 set_property target_language Verilog [current_project]
-set_property ip_output_repo {f:/VIVADO WORKSPACE/testing/image_rotate/image_rotate.cache/ip} [current_project]
+set_property ip_output_repo d:/VIVADO_workspace/image_rotate/image_rotate.cache/ip [current_project]
 set_property ip_cache_permissions {read write} [current_project]
 OPTRACE "Creating in-memory project" END { }
 OPTRACE "Adding files" START { }
-read_ip -quiet {{F:/VIVADO WORKSPACE/testing/image_rotate/image_rotate.srcs/sources_1/ip/bram_out/bram_out.xci}}
-set_property used_in_implementation false [get_files -all {{f:/VIVADO WORKSPACE/testing/image_rotate/image_rotate.gen/sources_1/ip/bram_out_1/bram_out_ooc.xdc}}]
+read_ip -quiet D:/VIVADO_workspace/image_rotate/image_rotate.srcs/sources_1/ip/bram_out/bram_out.xci
+set_property used_in_implementation false [get_files -all d:/VIVADO_workspace/image_rotate/image_rotate.gen/sources_1/ip/bram_out_1/bram_out_ooc.xdc]
 
 OPTRACE "Adding files" END { }
 # Mark all dcp files as not used in implementation to prevent them from being
@@ -107,7 +105,7 @@ set_property used_in_implementation false [get_files dont_touch.xdc]
 set_param ips.enableIPCacheLiteLoad 1
 OPTRACE "Configure IP Cache" START { }
 
-set cacheID [config_ip_cache -export -no_bom  -dir {F:/VIVADO WORKSPACE/testing/image_rotate/image_rotate.runs/bram_out_synth_1} -new_name bram_out -ip [get_ips bram_out]]
+set cacheID [config_ip_cache -export -no_bom  -dir D:/VIVADO_workspace/image_rotate/image_rotate.runs/bram_out_synth_1 -new_name bram_out -ip [get_ips bram_out]]
 
 OPTRACE "Configure IP Cache" END { }
 if { $cacheID == "" } {
@@ -162,32 +160,32 @@ create_report "bram_out_synth_1_synth_report_utilization_0" "report_utilization 
 OPTRACE "synth reports" END { }
 
 if { [catch {
-  file copy -force {F:/VIVADO WORKSPACE/testing/image_rotate/image_rotate.runs/bram_out_synth_1/bram_out.dcp} {f:/VIVADO WORKSPACE/testing/image_rotate/image_rotate.gen/sources_1/ip/bram_out_1/bram_out.dcp}
+  file copy -force D:/VIVADO_workspace/image_rotate/image_rotate.runs/bram_out_synth_1/bram_out.dcp d:/VIVADO_workspace/image_rotate/image_rotate.gen/sources_1/ip/bram_out_1/bram_out.dcp
 } _RESULT ] } { 
   send_msg_id runtcl-3 status "ERROR: Unable to successfully create or copy the sub-design checkpoint file."
   error "ERROR: Unable to successfully create or copy the sub-design checkpoint file."
 }
 
 if { [catch {
-  write_verilog -force -mode synth_stub {f:/VIVADO WORKSPACE/testing/image_rotate/image_rotate.gen/sources_1/ip/bram_out_1/bram_out_stub.v}
+  write_verilog -force -mode synth_stub d:/VIVADO_workspace/image_rotate/image_rotate.gen/sources_1/ip/bram_out_1/bram_out_stub.v
 } _RESULT ] } { 
   puts "CRITICAL WARNING: Unable to successfully create a Verilog synthesis stub for the sub-design. This may lead to errors in top level synthesis of the design. Error reported: $_RESULT"
 }
 
 if { [catch {
-  write_vhdl -force -mode synth_stub {f:/VIVADO WORKSPACE/testing/image_rotate/image_rotate.gen/sources_1/ip/bram_out_1/bram_out_stub.vhdl}
+  write_vhdl -force -mode synth_stub d:/VIVADO_workspace/image_rotate/image_rotate.gen/sources_1/ip/bram_out_1/bram_out_stub.vhdl
 } _RESULT ] } { 
   puts "CRITICAL WARNING: Unable to successfully create a VHDL synthesis stub for the sub-design. This may lead to errors in top level synthesis of the design. Error reported: $_RESULT"
 }
 
 if { [catch {
-  write_verilog -force -mode funcsim {f:/VIVADO WORKSPACE/testing/image_rotate/image_rotate.gen/sources_1/ip/bram_out_1/bram_out_sim_netlist.v}
+  write_verilog -force -mode funcsim d:/VIVADO_workspace/image_rotate/image_rotate.gen/sources_1/ip/bram_out_1/bram_out_sim_netlist.v
 } _RESULT ] } { 
   puts "CRITICAL WARNING: Unable to successfully create the Verilog functional simulation sub-design file. Post-Synthesis Functional Simulation with this file may not be possible or may give incorrect results. Error reported: $_RESULT"
 }
 
 if { [catch {
-  write_vhdl -force -mode funcsim {f:/VIVADO WORKSPACE/testing/image_rotate/image_rotate.gen/sources_1/ip/bram_out_1/bram_out_sim_netlist.vhdl}
+  write_vhdl -force -mode funcsim d:/VIVADO_workspace/image_rotate/image_rotate.gen/sources_1/ip/bram_out_1/bram_out_sim_netlist.vhdl
 } _RESULT ] } { 
   puts "CRITICAL WARNING: Unable to successfully create the VHDL functional simulation sub-design file. Post-Synthesis Functional Simulation with this file may not be possible or may give incorrect results. Error reported: $_RESULT"
 }
@@ -197,32 +195,32 @@ if { [catch {
 
 
 if { [catch {
-  file copy -force {F:/VIVADO WORKSPACE/testing/image_rotate/image_rotate.runs/bram_out_synth_1/bram_out.dcp} {f:/VIVADO WORKSPACE/testing/image_rotate/image_rotate.gen/sources_1/ip/bram_out_1/bram_out.dcp}
+  file copy -force D:/VIVADO_workspace/image_rotate/image_rotate.runs/bram_out_synth_1/bram_out.dcp d:/VIVADO_workspace/image_rotate/image_rotate.gen/sources_1/ip/bram_out_1/bram_out.dcp
 } _RESULT ] } { 
   send_msg_id runtcl-3 status "ERROR: Unable to successfully create or copy the sub-design checkpoint file."
   error "ERROR: Unable to successfully create or copy the sub-design checkpoint file."
 }
 
 if { [catch {
-  file rename -force {F:/VIVADO WORKSPACE/testing/image_rotate/image_rotate.runs/bram_out_synth_1/bram_out_stub.v} {f:/VIVADO WORKSPACE/testing/image_rotate/image_rotate.gen/sources_1/ip/bram_out_1/bram_out_stub.v}
+  file rename -force D:/VIVADO_workspace/image_rotate/image_rotate.runs/bram_out_synth_1/bram_out_stub.v d:/VIVADO_workspace/image_rotate/image_rotate.gen/sources_1/ip/bram_out_1/bram_out_stub.v
 } _RESULT ] } { 
   puts "CRITICAL WARNING: Unable to successfully create a Verilog synthesis stub for the sub-design. This may lead to errors in top level synthesis of the design. Error reported: $_RESULT"
 }
 
 if { [catch {
-  file rename -force {F:/VIVADO WORKSPACE/testing/image_rotate/image_rotate.runs/bram_out_synth_1/bram_out_stub.vhdl} {f:/VIVADO WORKSPACE/testing/image_rotate/image_rotate.gen/sources_1/ip/bram_out_1/bram_out_stub.vhdl}
+  file rename -force D:/VIVADO_workspace/image_rotate/image_rotate.runs/bram_out_synth_1/bram_out_stub.vhdl d:/VIVADO_workspace/image_rotate/image_rotate.gen/sources_1/ip/bram_out_1/bram_out_stub.vhdl
 } _RESULT ] } { 
   puts "CRITICAL WARNING: Unable to successfully create a VHDL synthesis stub for the sub-design. This may lead to errors in top level synthesis of the design. Error reported: $_RESULT"
 }
 
 if { [catch {
-  file rename -force {F:/VIVADO WORKSPACE/testing/image_rotate/image_rotate.runs/bram_out_synth_1/bram_out_sim_netlist.v} {f:/VIVADO WORKSPACE/testing/image_rotate/image_rotate.gen/sources_1/ip/bram_out_1/bram_out_sim_netlist.v}
+  file rename -force D:/VIVADO_workspace/image_rotate/image_rotate.runs/bram_out_synth_1/bram_out_sim_netlist.v d:/VIVADO_workspace/image_rotate/image_rotate.gen/sources_1/ip/bram_out_1/bram_out_sim_netlist.v
 } _RESULT ] } { 
   puts "CRITICAL WARNING: Unable to successfully create the Verilog functional simulation sub-design file. Post-Synthesis Functional Simulation with this file may not be possible or may give incorrect results. Error reported: $_RESULT"
 }
 
 if { [catch {
-  file rename -force {F:/VIVADO WORKSPACE/testing/image_rotate/image_rotate.runs/bram_out_synth_1/bram_out_sim_netlist.vhdl} {f:/VIVADO WORKSPACE/testing/image_rotate/image_rotate.gen/sources_1/ip/bram_out_1/bram_out_sim_netlist.vhdl}
+  file rename -force D:/VIVADO_workspace/image_rotate/image_rotate.runs/bram_out_synth_1/bram_out_sim_netlist.vhdl d:/VIVADO_workspace/image_rotate/image_rotate.gen/sources_1/ip/bram_out_1/bram_out_sim_netlist.vhdl
 } _RESULT ] } { 
   puts "CRITICAL WARNING: Unable to successfully create the VHDL functional simulation sub-design file. Post-Synthesis Functional Simulation with this file may not be possible or may give incorrect results. Error reported: $_RESULT"
 }
@@ -230,15 +228,15 @@ if { [catch {
 close [open .end.used_ip_cache.rst w]
 }; # end if cacheID 
 
-if {[file isdir {F:/VIVADO WORKSPACE/testing/image_rotate/image_rotate.ip_user_files/ip/bram_out}]} {
+if {[file isdir D:/VIVADO_workspace/image_rotate/image_rotate.ip_user_files/ip/bram_out]} {
   catch { 
-    file copy -force {{f:/VIVADO WORKSPACE/testing/image_rotate/image_rotate.gen/sources_1/ip/bram_out_1/bram_out_stub.v}} {F:/VIVADO WORKSPACE/testing/image_rotate/image_rotate.ip_user_files/ip/bram_out}
+    file copy -force d:/VIVADO_workspace/image_rotate/image_rotate.gen/sources_1/ip/bram_out_1/bram_out_stub.v D:/VIVADO_workspace/image_rotate/image_rotate.ip_user_files/ip/bram_out
   }
 }
 
-if {[file isdir {F:/VIVADO WORKSPACE/testing/image_rotate/image_rotate.ip_user_files/ip/bram_out}]} {
+if {[file isdir D:/VIVADO_workspace/image_rotate/image_rotate.ip_user_files/ip/bram_out]} {
   catch { 
-    file copy -force {{f:/VIVADO WORKSPACE/testing/image_rotate/image_rotate.gen/sources_1/ip/bram_out_1/bram_out_stub.vhdl}} {F:/VIVADO WORKSPACE/testing/image_rotate/image_rotate.ip_user_files/ip/bram_out}
+    file copy -force d:/VIVADO_workspace/image_rotate/image_rotate.gen/sources_1/ip/bram_out_1/bram_out_stub.vhdl D:/VIVADO_workspace/image_rotate/image_rotate.ip_user_files/ip/bram_out
   }
 }
 file delete __synthesis_is_running__

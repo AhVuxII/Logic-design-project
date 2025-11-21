@@ -1,0 +1,5 @@
+xpm_memory.sv,systemverilog,xpm,../../../../../../VIVADO/Vivado/2023.1/data/ip/xpm/xpm_memory/hdl/xpm_memory.sv,
+xpm_VCOMP.vhd,vhdl,xpm,../../../../../../VIVADO/Vivado/2023.1/data/ip/xpm/xpm_VCOMP.vhd,
+blk_mem_gen_v8_4.v,verilog,blk_mem_gen_v8_4_6,../../../ipstatic/simulation/blk_mem_gen_v8_4.v,
+bram_in.v,verilog,xil_defaultlib,../../../../image_rotate.gen/sources_1/ip/bram_in_3/sim/bram_in.v,
+glbl.v,Verilog,xil_defaultlib,glbl.v

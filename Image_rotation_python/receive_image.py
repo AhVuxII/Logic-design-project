@@ -17,12 +17,8 @@ def run():
 
             expected_bytes = IMG_SIZE * IMG_SIZE
             data = ser.read(expected_bytes)
-
-            if len(data) != expected_bytes:
-                print(f"error: only received {len(data)} bytes.")
-            return
         
-        print("received enough bytes")
+            print("received enough bytes")
 
         # chuyển bytes sang ảnh
         arr = np.frombuffer(data, dtype=np.uint8).reshape((IMG_SIZE, IMG_SIZE))

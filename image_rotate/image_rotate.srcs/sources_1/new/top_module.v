@@ -29,12 +29,10 @@ module top_module #(
     input clk_125mhz,
     input BTN1, // start button
     input [1:0] SW, // mode button
-    input uart_rx,
+
     output uart_tx,
     output LD0,
-    output LD1,
-    output LD2,
-    output LD3
+    output LD1
 );
     
     localparam img_size = img_x * img_y;
@@ -42,17 +40,6 @@ module top_module #(
         
     wire clk = clk_125mhz;
     wire reset = BTN1; // active low (reset when pressed)
-    //reg [3:0] reset_counter = 0;
-    //reg reset = 1;
-    // hold BTN1 for 16 clock cycles to reset
-    /*always @(posedge clk) begin
-        if (reset_counter < 15) begin
-            reset_counter <= reset_counter + 1;
-            reset <= 1;
-        end else begin
-            reset <= 0;
-        end
-    end*/
     
     wire rotate_done;
     wire [7:0] data_in_A;
@@ -67,16 +54,14 @@ module top_module #(
     reg rd_en_B_uart;
     reg [3:0] state;
     localparam IDLE = 4'd0;
-    // localparam RECEIVE = 4'd1;
-   // localparam WAIT_START = 4'd2;  // wait for BTN1 press
-    localparam ROTATE_START = 4'd2;
-    localparam ROTATE_WAIT = 4'd3;
-    localparam SEND_ADDR = 4'd4;   
-    localparam SEND_WAIT_BRAM = 4'd5; // Wait for BRAM latency
-    localparam SEND_TX = 4'd6;     
-    localparam WAIT_TX = 4'd7;
+    localparam ROTATE_START = 4'd1;
+    localparam ROTATE_WAIT = 4'd2;
+    localparam SEND_ADDR = 4'd3;   
+    localparam SEND_WAIT_BRAM = 4'd4; // Wait for BRAM latency
+    localparam SEND_TX = 4'd5;     
+    localparam WAIT_TX = 4'd6;
     
-    reg [addr_size-1 :0] rx_counter;
+    //reg [addr_size-1 :0] rx_counter;
     reg [addr_size-1 :0] tx_counter;
     reg rotate_start;
     
@@ -87,22 +72,11 @@ module top_module #(
     wire tx_active;
     wire tx_done;
     
-    // debouncer
-    reg btn1_sync1, btn1_sync2, btn1_sync3;
-    wire btn1_pressed;
-    
-    always @(posedge clk) begin
-        btn1_sync1 <= BTN1;
-        btn1_sync2 <= btn1_sync1;
-        btn1_sync3 <= btn1_sync2;
-    end
-    assign btn1_pressed = btn1_sync2 && !btn1_sync3; // button pressed
-    
     // FSM
     always @(posedge clk or posedge reset) begin
         if (reset) begin
             state <= IDLE;
-            rx_counter <= 0;
+            //rx_counter <= 0;
             tx_counter <= 0;
             rotate_start <= 0;
             tx_dv <= 0;
@@ -115,29 +89,10 @@ module top_module #(
             
             case (state)
                 IDLE: begin
-                    rx_counter <= 0;
+                    //rx_counter <= 0;
                     tx_counter <= 0;
-                    if (rx_dv /*&& rx_byte == 8'hAA*/) begin
                         state <= ROTATE_START;
-                    end
                 end
-                
-                /*
-                RECEIVE: begin
-                    if (rx_dv) begin
-                        rx_counter <= rx_counter + 1;
-                        if (rx_counter == (img_size - 1)) begin
-                            state <= ROTATE_START; // WAIT_START;
-                        end
-                    end
-                end
-                */
-                
-            /*    WAIT_START: begin
-                    if (btn1_pressed) begin
-                        state <= ROTATE_START;
-                    end
-                end*/
                 
                 ROTATE_START: begin
                     rotate_start <= 1;
@@ -176,15 +131,14 @@ module top_module #(
                         end
                     end
                 end
+                
                 default: state <= IDLE;
             endcase
         end
     end
     
-    assign LD0 = state[0];          // sáng khi ?ang b?n
-    assign LD1 = state[1];           // nh?p nháy nhanh khi ?ang nh?n
-    assign LD2 = state[2];           // nh?p nháy ch?m h?n
-    assign LD3 = state[3];            // sáng lên khi nh?n ???c > 50% ?nh
+    assign LD0 = (state != IDLE);
+    assign LD1 = state[1];          // sang
     
     // IMAGE_ROTATE MODULE
     image_rotate #(
@@ -231,23 +185,9 @@ module top_module #(
         .doutb(data_in_B)
     );
     
-    // UART_RX MODULE
-    uart_rx #(
-        .TICKS_PER_BIT(1085),      // 125MHz / 9600 = 13020
-        .TICKS_PER_BIT_SIZE(11)     // need 11 bits for 1085
-    ) rx (
-        .i_clk(clk),
-        .i_enable(1'b1),            // always enable
-        .i_din(uart_rx),            // 
-        
-        .o_rxdata(rx_byte),         // 
-        .o_recvdata(rx_dv),         // 
-        .o_busy()                   // 
-    );
-    
     // UART_TX MODULE
     uart_tx #(
-        .TICKS_PER_BIT(1085),      // 125MHz / 9600 = 13020
+        .TICKS_PER_BIT(1085),      // 125MHz / 115200 = 1085
         .TICKS_PER_BIT_SIZE(11)     
     ) tx (
         .i_clk(clk),

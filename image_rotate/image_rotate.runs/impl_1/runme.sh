@@ -12,9 +12,9 @@ echo "Please update the PATH and LD_LIBRARY_PATH variables below, before executi
 exit
 
 if [ -z "$PATH" ]; then
-  PATH=F:/VIVADO/Vivado/2023.1/ids_lite/ISE/bin/nt64;F:/VIVADO/Vivado/2023.1/ids_lite/ISE/lib/nt64:F:/VIVADO/Vivado/2023.1/bin
+  PATH=D:/VIVADO/Vivado/2023.1/ids_lite/ISE/bin/nt64;D:/VIVADO/Vivado/2023.1/ids_lite/ISE/lib/nt64:D:/VIVADO/Vivado/2023.1/bin
 else
-  PATH=F:/VIVADO/Vivado/2023.1/ids_lite/ISE/bin/nt64;F:/VIVADO/Vivado/2023.1/ids_lite/ISE/lib/nt64:F:/VIVADO/Vivado/2023.1/bin:$PATH
+  PATH=D:/VIVADO/Vivado/2023.1/ids_lite/ISE/bin/nt64;D:/VIVADO/Vivado/2023.1/ids_lite/ISE/lib/nt64:D:/VIVADO/Vivado/2023.1/bin:$PATH
 fi
 export PATH
 
@@ -25,7 +25,7 @@ else
 fi
 export LD_LIBRARY_PATH
 
-HD_PWD='F:/VIVADO WORKSPACE/testing/image_rotate/image_rotate.runs/impl_1'
+HD_PWD='D:/VIVADO_workspace/image_rotate/image_rotate.runs/impl_1'
 cd "$HD_PWD"
 
 HD_LOG=runme.log
@@ -42,7 +42,7 @@ EAStep()
 }
 
 # pre-commands:
-/bin/touch .init_design.begin.rst
+/bin/touch .write_bitstream.begin.rst
 EAStep vivado -log top_module.vdi -applog -m64 -product Vivado -messageDb vivado.pb -mode batch -source top_module.tcl -notrace
 
 

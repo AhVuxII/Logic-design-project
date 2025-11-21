@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="impl_1" LaunchPart="xc7z020clg400-1" LaunchTime="1763643035">
+<GenRun Id="impl_1" LaunchPart="xc7z020clg400-1" LaunchTime="1763705413">
   <File Type="ROUTE-PWR" Name="top_module_power_routed.rpt"/>
   <File Type="PA-TCL" Name="top_module.tcl"/>
   <File Type="ROUTE-PWR-SUM" Name="top_module_power_summary_routed.pb"/>
@@ -114,6 +114,19 @@
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
+    <File Path="$PPRDIR/../Image_rotation_python/image_data.coe">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/ip/bram_in/bram_in.xci">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
     <Config>
       <Option Name="DesignMode" Val="RTL"/>
       <Option Name="TopModule" Val="top_module"/>
@@ -158,6 +171,5 @@
     <Step Id="post_route_phys_opt_design"/>
     <Step Id="write_bitstream"/>
   </Strategy>
-  <BlockFileSet Type="BlockSrcs" Name="bram_in"/>
   <BlockFileSet Type="BlockSrcs" Name="bram_out"/>
 </GenRun>
