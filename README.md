@@ -33,6 +33,11 @@ There will be a file named "image_data.coe" in that same folder.
 
 ### Step 4: Store the image
 - Go to Vivado and open image_rotate project -> double click on bram_in -> Other options -> Choose load init file and press OK to generate.
+- Change the img_x and img_y size in top_module.v to the image size:
+```bash
+ parameter img_x = 256, // change img size here
+ parameter img_y = 256, // change img size here
+```
 - Generate Bitstream and connect Arty-Z7 20 -> Program device.
 
 ### Step 5: Rotate the image
