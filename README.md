@@ -20,10 +20,12 @@ pip install pyserial numpy matplotlib pillow
 In convert_image.py, change the size of the image and the image name 'random.jpg' to the name of your image.
 ```bash
 # change it here
-IMG_SIZE = 256 # đổi kích cỡ ảnh
+# đổi kích cỡ ảnh
+IMG_WIDTH = 256;
+IMG_HEIGHT = 256;
 IMG_PATH = 'random.jpg' # đổi ảnh
 ```
-After done changing the name, run the following in the terminal:
+After done changing the name, run the following command in the terminal:
 ```bash
 python convert_image.py
 ```
@@ -34,13 +36,18 @@ There will be a file named "image_data.coe" in that same folder.
 - Generate Bitstream and connect Arty-Z7 20 -> Program device.
 
 ### Step 5: Rotate the image
-- Open Python code "receive_image.py".
-- Switch for modes:
+- Open Python code "receive_image.py". Change the image size according to yours here:
+```bash
+# đổi kích cỡ ảnh
+IMG_WIDTH = 256;
+IMG_HEIGHT = 256;
+```
+- Use the switches on the board for modes:
   - 00: rotate Clockwise
   - 01: rotate Counter-clockwise
   - 10: mirror Horizontal
   - 11: mirror Vertical
-- After choosing the rotate mode, run the following in the terminal:
+- After choosing the rotate mode, run the following command in the terminal:
 ```bash
 python receive_image.py
 ```
