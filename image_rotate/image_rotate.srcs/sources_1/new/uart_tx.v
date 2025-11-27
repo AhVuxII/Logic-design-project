@@ -1,15 +1,15 @@
 module uart_tx 
     /* BEGIN PARAMETERS LIST */
     #(
-        parameter TICKS_PER_BIT = 1085,      // 125MHz / 9600 = 13020
-        parameter TICKS_PER_BIT_SIZE = 11     // C?n 14 bit ?? ch?a s? 13020
+        parameter TICKS_PER_BIT = 1085,      // 125MHz / 115200 = 1085
+        parameter TICKS_PER_BIT_SIZE = 11     // need 11 bits for 1085
     )
     /* END PARAMETERS LIST */ 
     
     /* BEGIN MODULE IO LIST */
     (
         input i_clk,
-        input i_rst,          // <--- ?ã thêm c?ng Reset ?? n?i v?i BTN1
+        input i_rst,     
         input i_start,
         input [7:0] i_data,
         output wire o_done,
@@ -111,7 +111,7 @@ module uart_tx
         endcase
     end
     
-    // Thêm Reset vào ?ây ?? m?ch ?n ??nh
+
     always @(posedge i_clk or posedge i_rst) begin 
         if (i_rst) begin
             currentState <= STATE_IDLE;

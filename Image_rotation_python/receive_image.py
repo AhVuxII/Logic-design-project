@@ -5,7 +5,8 @@ import time
 
 PORT = 'COM3' # lấy COM USB to TTL
 BAUD = 115200
-IMG_SIZE = 256
+IMG_WIDTH = 256;
+IMG_HEIGHT = 256;
 OUTPUT_IMG = 'image_result.jpg' # đổi tên
 
 def run():
@@ -15,13 +16,13 @@ def run():
         with serial.Serial(PORT, BAUD, timeout=20) as ser:
             print("thả nút BTN1")
 
-            expected_bytes = IMG_SIZE * IMG_SIZE
+            expected_bytes = IMG_WIDTH * IMG_HEIGHT
             data = ser.read(expected_bytes)
         
             print("received enough bytes")
 
         # chuyển bytes sang ảnh
-        arr = np.frombuffer(data, dtype=np.uint8).reshape((IMG_SIZE, IMG_SIZE))
+        arr = np.frombuffer(data, dtype=np.uint8).reshape((IMG_WIDTH, IMG_HEIGHT))
         img = Image.fromarray(arr)
 
         # lưu và hiện ảnh

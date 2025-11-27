@@ -2,10 +2,10 @@
 -- Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2023.1 (win64) Build 3865809 Sun May  7 15:05:29 MDT 2023
--- Date        : Fri Nov 21 11:46:11 2025
--- Host        : DESKTOP-7IUMTM5 running 64-bit major release  (build 9200)
--- Command     : write_vhdl -force -mode synth_stub -rename_top bram_in -prefix
---               bram_in_ bram_in_stub.vhdl
+-- Date        : Thu Nov 27 15:18:50 2025
+-- Host        : DESKTOP-R8IJURE running 64-bit major release  (build 9200)
+-- Command     : write_vhdl -force -mode synth_stub {f:/VIVADO
+--               WORKSPACE/image_rotate/image_rotate.gen/sources_1/ip/bram_in_3/bram_in_stub.vhdl}
 -- Design      : bram_in
 -- Purpose     : Stub declaration of top-level module interface
 -- Device      : xc7z020clg400-1

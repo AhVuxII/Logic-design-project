@@ -21,8 +21,8 @@
 
 
 module top_module #(
-    parameter img_x = 256,
-    parameter img_y = 256,
+    parameter img_x = 256, // change img size here
+    parameter img_y = 256, // change img size here
     parameter data = 8
 )
 (

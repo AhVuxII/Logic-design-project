@@ -25,7 +25,7 @@ else
 fi
 export LD_LIBRARY_PATH
 
-HD_PWD='F:/VIVADO WORKSPACE/testing/image_rotate/image_rotate.runs/bram_in_synth_1'
+HD_PWD='F:/VIVADO WORKSPACE/image_rotate/image_rotate.runs/bram_in_synth_1'
 cd "$HD_PWD"
 
 HD_LOG=runme.log
