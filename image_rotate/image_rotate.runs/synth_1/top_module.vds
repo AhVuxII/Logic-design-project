@@ -3,18 +3,18 @@
 # SW Build 3865809 on Sun May  7 15:05:29 MDT 2023
 # IP Build 3864474 on Sun May  7 20:36:21 MDT 2023
 # SharedData Build 3865790 on Sun May 07 13:33:03 MDT 2023
-# Start of session at: Thu Nov 27 15:57:07 2025
-# Process ID: 10032
-# Current directory: F:/VIVADO WORKSPACE/image_rotate/image_rotate.runs/synth_1
+# Start of session at: Fri Nov 28 08:50:28 2025
+# Process ID: 9752
+# Current directory: D:/VIVADO_workspace/image_rotate/image_rotate.runs/synth_1
 # Command line: vivado.exe -log top_module.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source top_module.tcl
-# Log file: F:/VIVADO WORKSPACE/image_rotate/image_rotate.runs/synth_1/top_module.vds
-# Journal file: F:/VIVADO WORKSPACE/image_rotate/image_rotate.runs/synth_1\vivado.jou
-# Running On: DESKTOP-R8IJURE, OS: Windows, CPU Frequency: 2496 MHz, CPU Physical cores: 8, Host memory: 34218 MB
+# Log file: D:/VIVADO_workspace/image_rotate/image_rotate.runs/synth_1/top_module.vds
+# Journal file: D:/VIVADO_workspace/image_rotate/image_rotate.runs/synth_1\vivado.jou
+# Running On: DESKTOP-7IUMTM5, OS: Windows, CPU Frequency: 2096 MHz, CPU Physical cores: 8, Host memory: 23556 MB
 #-----------------------------------------------------------
 source top_module.tcl -notrace
-create_project: Time (s): cpu = 00:00:07 ; elapsed = 00:00:08 . Memory (MB): peak = 480.797 ; gain = 200.324
-Command: read_checkpoint -auto_incremental -incremental {F:/VIVADO WORKSPACE/image_rotate/image_rotate.srcs/utils_1/imports/synth_1/top_module.dcp}
-INFO: [Vivado 12-5825] Read reference checkpoint from F:/VIVADO WORKSPACE/image_rotate/image_rotate.srcs/utils_1/imports/synth_1/top_module.dcp for incremental synthesis
+create_project: Time (s): cpu = 00:00:13 ; elapsed = 00:00:14 . Memory (MB): peak = 467.625 ; gain = 200.848
+Command: read_checkpoint -auto_incremental -incremental D:/VIVADO_workspace/image_rotate/image_rotate.srcs/utils_1/imports/synth_1/top_module.dcp
+INFO: [Vivado 12-5825] Read reference checkpoint from D:/VIVADO_workspace/image_rotate/image_rotate.srcs/utils_1/imports/synth_1/top_module.dcp for incremental synthesis
 INFO: [Vivado 12-7989] Please ensure there are no constraint changes
 Command: synth_design -top top_module -part xc7z020clg400-1
 Starting synth_design
@@ -25,74 +25,74 @@ INFO: [Designutils 20-5440] No compile time benefit to using incremental synthes
 INFO: [Designutils 20-4379] Flow is switching to default flow due to incremental criteria not met. If you would like to alter this behaviour and have the flow terminate instead, please set the following parameter config_implementation {autoIncr.Synth.RejectBehavior Terminate}
 INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
 INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
-INFO: [Synth 8-7075] Helper process launched with PID 10952
+INFO: [Synth 8-7075] Helper process launched with PID 3912
 ---------------------------------------------------------------------------------
-Starting RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 1334.211 ; gain = 413.453
+Starting RTL Elaboration : Time (s): cpu = 00:00:08 ; elapsed = 00:00:09 . Memory (MB): peak = 1317.992 ; gain = 409.363
 ---------------------------------------------------------------------------------
-INFO: [Synth 8-6157] synthesizing module 'top_module' [F:/VIVADO WORKSPACE/image_rotate/image_rotate.srcs/sources_1/new/top_module.v:23]
-INFO: [Synth 8-6157] synthesizing module 'image_rotate' [F:/VIVADO WORKSPACE/image_rotate/image_rotate.srcs/sources_1/new/image_rotate.v:22]
+INFO: [Synth 8-6157] synthesizing module 'top_module' [D:/VIVADO_workspace/image_rotate/image_rotate.srcs/sources_1/new/top_module.v:23]
+INFO: [Synth 8-6157] synthesizing module 'image_rotate' [D:/VIVADO_workspace/image_rotate/image_rotate.srcs/sources_1/new/image_rotate.v:22]
 	Parameter img_x bound to: 256 - type: integer 
-	Parameter img_y bound to: 256 - type: integer 
+	Parameter img_y bound to: 512 - type: integer 
 	Parameter data bound to: 8 - type: integer 
-INFO: [Synth 8-155] case statement is not full and has no default [F:/VIVADO WORKSPACE/image_rotate/image_rotate.srcs/sources_1/new/image_rotate.v:130]
-INFO: [Synth 8-226] default block is never used [F:/VIVADO WORKSPACE/image_rotate/image_rotate.srcs/sources_1/new/image_rotate.v:163]
-INFO: [Synth 8-155] case statement is not full and has no default [F:/VIVADO WORKSPACE/image_rotate/image_rotate.srcs/sources_1/new/image_rotate.v:215]
-INFO: [Synth 8-6155] done synthesizing module 'image_rotate' (0#1) [F:/VIVADO WORKSPACE/image_rotate/image_rotate.srcs/sources_1/new/image_rotate.v:22]
-INFO: [Synth 8-6157] synthesizing module 'bram_in' [F:/VIVADO WORKSPACE/image_rotate/image_rotate.runs/synth_1/.Xil/Vivado-10032-DESKTOP-R8IJURE/realtime/bram_in_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'bram_in' (0#1) [F:/VIVADO WORKSPACE/image_rotate/image_rotate.runs/synth_1/.Xil/Vivado-10032-DESKTOP-R8IJURE/realtime/bram_in_stub.v:6]
-INFO: [Synth 8-6157] synthesizing module 'bram_out' [F:/VIVADO WORKSPACE/image_rotate/image_rotate.runs/synth_1/.Xil/Vivado-10032-DESKTOP-R8IJURE/realtime/bram_out_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'bram_out' (0#1) [F:/VIVADO WORKSPACE/image_rotate/image_rotate.runs/synth_1/.Xil/Vivado-10032-DESKTOP-R8IJURE/realtime/bram_out_stub.v:6]
-INFO: [Synth 8-6157] synthesizing module 'uart_tx' [F:/VIVADO WORKSPACE/image_rotate/image_rotate.srcs/sources_1/new/uart_tx.v:1]
+INFO: [Synth 8-155] case statement is not full and has no default [D:/VIVADO_workspace/image_rotate/image_rotate.srcs/sources_1/new/image_rotate.v:130]
+INFO: [Synth 8-226] default block is never used [D:/VIVADO_workspace/image_rotate/image_rotate.srcs/sources_1/new/image_rotate.v:163]
+INFO: [Synth 8-155] case statement is not full and has no default [D:/VIVADO_workspace/image_rotate/image_rotate.srcs/sources_1/new/image_rotate.v:215]
+INFO: [Synth 8-6155] done synthesizing module 'image_rotate' (0#1) [D:/VIVADO_workspace/image_rotate/image_rotate.srcs/sources_1/new/image_rotate.v:22]
+INFO: [Synth 8-6157] synthesizing module 'bram_in' [D:/VIVADO_workspace/image_rotate/image_rotate.runs/synth_1/.Xil/Vivado-9752-DESKTOP-7IUMTM5/realtime/bram_in_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'bram_in' (0#1) [D:/VIVADO_workspace/image_rotate/image_rotate.runs/synth_1/.Xil/Vivado-9752-DESKTOP-7IUMTM5/realtime/bram_in_stub.v:6]
+INFO: [Synth 8-6157] synthesizing module 'bram_out' [D:/VIVADO_workspace/image_rotate/image_rotate.runs/synth_1/.Xil/Vivado-9752-DESKTOP-7IUMTM5/realtime/bram_out_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'bram_out' (0#1) [D:/VIVADO_workspace/image_rotate/image_rotate.runs/synth_1/.Xil/Vivado-9752-DESKTOP-7IUMTM5/realtime/bram_out_stub.v:6]
+INFO: [Synth 8-6157] synthesizing module 'uart_tx' [D:/VIVADO_workspace/image_rotate/image_rotate.srcs/sources_1/new/uart_tx.v:1]
 	Parameter TICKS_PER_BIT bound to: 1085 - type: integer 
 	Parameter TICKS_PER_BIT_SIZE bound to: 11 - type: integer 
-INFO: [Synth 8-6155] done synthesizing module 'uart_tx' (0#1) [F:/VIVADO WORKSPACE/image_rotate/image_rotate.srcs/sources_1/new/uart_tx.v:1]
-INFO: [Synth 8-6155] done synthesizing module 'top_module' (0#1) [F:/VIVADO WORKSPACE/image_rotate/image_rotate.srcs/sources_1/new/top_module.v:23]
-WARNING: [Synth 8-7137] Register tx_byte_reg in module top_module has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [F:/VIVADO WORKSPACE/image_rotate/image_rotate.srcs/sources_1/new/top_module.v:118]
+INFO: [Synth 8-6155] done synthesizing module 'uart_tx' (0#1) [D:/VIVADO_workspace/image_rotate/image_rotate.srcs/sources_1/new/uart_tx.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'top_module' (0#1) [D:/VIVADO_workspace/image_rotate/image_rotate.srcs/sources_1/new/top_module.v:23]
+WARNING: [Synth 8-7137] Register tx_byte_reg in module top_module has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [D:/VIVADO_workspace/image_rotate/image_rotate.srcs/sources_1/new/top_module.v:118]
 ---------------------------------------------------------------------------------
-Finished RTL Elaboration : Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 1426.945 ; gain = 506.188
+Finished RTL Elaboration : Time (s): cpu = 00:00:10 ; elapsed = 00:00:11 . Memory (MB): peak = 1413.273 ; gain = 504.645
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 1426.945 ; gain = 506.188
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:11 ; elapsed = 00:00:11 . Memory (MB): peak = 1413.273 ; gain = 504.645
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 1426.945 ; gain = 506.188
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:11 ; elapsed = 00:00:11 . Memory (MB): peak = 1413.273 ; gain = 504.645
 ---------------------------------------------------------------------------------
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.003 . Memory (MB): peak = 1426.945 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.006 . Memory (MB): peak = 1413.273 ; gain = 0.000
 INFO: [Project 1-570] Preparing netlist for logic optimization
 
 Processing XDC Constraints
 Initializing timing engine
-Parsing XDC File [f:/VIVADO WORKSPACE/image_rotate/image_rotate.gen/sources_1/ip/bram_out_1/bram_out/bram_out_in_context.xdc] for cell 'uuuut'
-Finished Parsing XDC File [f:/VIVADO WORKSPACE/image_rotate/image_rotate.gen/sources_1/ip/bram_out_1/bram_out/bram_out_in_context.xdc] for cell 'uuuut'
-Parsing XDC File [f:/VIVADO WORKSPACE/image_rotate/image_rotate.gen/sources_1/ip/bram_in_3/bram_in/bram_in_in_context.xdc] for cell 'uuut'
-Finished Parsing XDC File [f:/VIVADO WORKSPACE/image_rotate/image_rotate.gen/sources_1/ip/bram_in_3/bram_in/bram_in_in_context.xdc] for cell 'uuut'
-Parsing XDC File [F:/VIVADO WORKSPACE/image_rotate/image_rotate.srcs/constrs_1/new/Arty-Z7-20-Master.xdc]
-Finished Parsing XDC File [F:/VIVADO WORKSPACE/image_rotate/image_rotate.srcs/constrs_1/new/Arty-Z7-20-Master.xdc]
-INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [F:/VIVADO WORKSPACE/image_rotate/image_rotate.srcs/constrs_1/new/Arty-Z7-20-Master.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/top_module_propImpl.xdc].
+Parsing XDC File [d:/VIVADO_workspace/image_rotate/image_rotate.gen/sources_1/ip/bram_out_1/bram_out/bram_out_in_context.xdc] for cell 'uuuut'
+Finished Parsing XDC File [d:/VIVADO_workspace/image_rotate/image_rotate.gen/sources_1/ip/bram_out_1/bram_out/bram_out_in_context.xdc] for cell 'uuuut'
+Parsing XDC File [d:/VIVADO_workspace/image_rotate/image_rotate.gen/sources_1/ip/bram_in_3/bram_in/bram_in_in_context.xdc] for cell 'uuut'
+Finished Parsing XDC File [d:/VIVADO_workspace/image_rotate/image_rotate.gen/sources_1/ip/bram_in_3/bram_in/bram_in_in_context.xdc] for cell 'uuut'
+Parsing XDC File [D:/VIVADO_workspace/image_rotate/image_rotate.srcs/constrs_1/new/Arty-Z7-20-Master.xdc]
+Finished Parsing XDC File [D:/VIVADO_workspace/image_rotate/image_rotate.srcs/constrs_1/new/Arty-Z7-20-Master.xdc]
+INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [D:/VIVADO_workspace/image_rotate/image_rotate.srcs/constrs_1/new/Arty-Z7-20-Master.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/top_module_propImpl.xdc].
 Resolution: To avoid this warning, move constraints listed in [.Xil/top_module_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
 Completed Processing XDC Constraints
 
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1474.477 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1502.621 ; gain = 0.000
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
-Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.002 . Memory (MB): peak = 1474.477 ; gain = 0.000
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.005 . Memory (MB): peak = 1502.621 ; gain = 0.000
 WARNING: [Timing 38-316] Clock period '20.000' specified during out-of-context synthesis of instance 'uuut' at clock pin 'clka' is different from the actual clock period '8.000', this can lead to different synthesis results.
 WARNING: [Timing 38-316] Clock period '20.000' specified during out-of-context synthesis of instance 'uuuut' at clock pin 'clka' is different from the actual clock period '8.000', this can lead to different synthesis results.
 INFO: [Designutils 20-5440] No compile time benefit to using incremental synthesis; A full resynthesis will be run
 INFO: [Designutils 20-4379] Flow is switching to default flow due to incremental criteria not met. If you would like to alter this behaviour and have the flow terminate instead, please set the following parameter config_implementation {autoIncr.Synth.RejectBehavior Terminate}
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:00:11 ; elapsed = 00:00:11 . Memory (MB): peak = 1478.426 ; gain = 557.668
+Finished Constraint Validation : Time (s): cpu = 00:00:21 ; elapsed = 00:00:23 . Memory (MB): peak = 1502.629 ; gain = 594.000
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
 ---------------------------------------------------------------------------------
 Loading part: xc7z020clg400-1
 ---------------------------------------------------------------------------------
-Finished Loading Part and Timing Information : Time (s): cpu = 00:00:11 ; elapsed = 00:00:11 . Memory (MB): peak = 1478.426 ; gain = 557.668
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:21 ; elapsed = 00:00:23 . Memory (MB): peak = 1502.629 ; gain = 594.000
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying 'set_property' XDC Constraints
@@ -100,7 +100,7 @@ Start Applying 'set_property' XDC Constraints
 Applied set_property KEEP_HIERARCHY = SOFT for uuuut. (constraint file  auto generated constraint).
 Applied set_property KEEP_HIERARCHY = SOFT for uuut. (constraint file  auto generated constraint).
 ---------------------------------------------------------------------------------
-Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:11 ; elapsed = 00:00:11 . Memory (MB): peak = 1478.426 ; gain = 557.668
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:22 ; elapsed = 00:00:23 . Memory (MB): peak = 1502.629 ; gain = 594.000
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-802] inferred FSM for state register 'state_reg' in module 'image_rotate'
 INFO: [Synth 8-802] inferred FSM for state register 'currentState_reg' in module 'uart_tx'
@@ -129,48 +129,47 @@ INFO: [Synth 8-3898] No Re-encoding of one hot register 'currentState_reg' in mo
 ---------------------------------------------------------------------------------------------------
                    State |                     New Encoding |                Previous Encoding 
 ---------------------------------------------------------------------------------------------------
-                    IDLE |                          0000001 |                             0000
-            ROTATE_START |                          0000010 |                             0001
-             ROTATE_WAIT |                          0000100 |                             0010
-               SEND_ADDR |                          0001000 |                             0011
-          SEND_WAIT_BRAM |                          0010000 |                             0100
-                 SEND_TX |                          0100000 |                             0101
-                 WAIT_TX |                          1000000 |                             0110
+                    IDLE |                              000 |                             0000
+            ROTATE_START |                              001 |                             0001
+             ROTATE_WAIT |                              010 |                             0010
+               SEND_ADDR |                              011 |                             0011
+          SEND_WAIT_BRAM |                              100 |                             0100
+                 SEND_TX |                              101 |                             0101
+                 WAIT_TX |                              110 |                             0110
 ---------------------------------------------------------------------------------------------------
-INFO: [Synth 8-3354] encoded FSM with state register 'state_reg' using encoding 'one-hot' in module 'top_module'
+INFO: [Synth 8-3354] encoded FSM with state register 'state_reg' using encoding 'sequential' in module 'top_module'
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:11 ; elapsed = 00:00:12 . Memory (MB): peak = 1478.426 ; gain = 557.668
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:22 ; elapsed = 00:00:23 . Memory (MB): peak = 1502.629 ; gain = 594.000
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start RTL Component Statistics 
 ---------------------------------------------------------------------------------
 Detailed RTL Component Info : 
 +---Adders : 
-	   2 Input   16 Bit       Adders := 5     
+	   2 Input   17 Bit       Adders := 6     
 	   2 Input   11 Bit       Adders := 1     
 	   2 Input    4 Bit       Adders := 1     
 +---Registers : 
-	               16 Bit    Registers := 3     
+	               17 Bit    Registers := 3     
 	               11 Bit    Registers := 1     
 	                8 Bit    Registers := 3     
 	                4 Bit    Registers := 2     
 	                1 Bit    Registers := 3     
 +---Muxes : 
-	   2 Input   16 Bit        Muxes := 5     
-	   4 Input   16 Bit        Muxes := 4     
-	   3 Input   16 Bit        Muxes := 2     
-	   7 Input   16 Bit        Muxes := 1     
+	   2 Input   17 Bit        Muxes := 6     
+	   4 Input   17 Bit        Muxes := 4     
+	   3 Input   17 Bit        Muxes := 2     
+	   7 Input   17 Bit        Muxes := 1     
 	   2 Input   11 Bit        Muxes := 1     
 	   2 Input    8 Bit        Muxes := 3     
 	   3 Input    8 Bit        Muxes := 1     
-	   7 Input    7 Bit        Muxes := 1     
-	   2 Input    7 Bit        Muxes := 1     
 	   5 Input    5 Bit        Muxes := 1     
 	   2 Input    5 Bit        Muxes := 2     
 	   6 Input    5 Bit        Muxes := 1     
 	   2 Input    4 Bit        Muxes := 3     
 	   5 Input    3 Bit        Muxes := 1     
-	   2 Input    3 Bit        Muxes := 2     
+	   2 Input    3 Bit        Muxes := 3     
+	   7 Input    3 Bit        Muxes := 1     
 	   8 Input    3 Bit        Muxes := 1     
 	   2 Input    2 Bit        Muxes := 1     
 	   2 Input    1 Bit        Muxes := 10    
@@ -178,7 +177,7 @@ Detailed RTL Component Info :
 	   5 Input    1 Bit        Muxes := 1     
 	   3 Input    1 Bit        Muxes := 3     
 	   6 Input    1 Bit        Muxes := 3     
-	   7 Input    1 Bit        Muxes := 2     
+	   7 Input    1 Bit        Muxes := 5     
 ---------------------------------------------------------------------------------
 Finished RTL Component Statistics 
 ---------------------------------------------------------------------------------
@@ -196,25 +195,25 @@ Start Cross Boundary and Area Optimization
 ---------------------------------------------------------------------------------
 WARNING: [Synth 8-7080] Parallel synthesis criteria is not met
 ---------------------------------------------------------------------------------
-Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:13 ; elapsed = 00:00:14 . Memory (MB): peak = 1478.426 ; gain = 557.668
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:25 ; elapsed = 00:00:26 . Memory (MB): peak = 1502.629 ; gain = 594.000
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying XDC Timing Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:18 ; elapsed = 00:00:19 . Memory (MB): peak = 1478.426 ; gain = 557.668
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:33 ; elapsed = 00:00:34 . Memory (MB): peak = 1502.629 ; gain = 594.000
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Timing Optimization
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:00:18 ; elapsed = 00:00:19 . Memory (MB): peak = 1478.426 ; gain = 557.668
+Finished Timing Optimization : Time (s): cpu = 00:00:34 ; elapsed = 00:00:35 . Memory (MB): peak = 1502.629 ; gain = 594.000
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Technology Mapping
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:00:19 ; elapsed = 00:00:19 . Memory (MB): peak = 1478.426 ; gain = 557.668
+Finished Technology Mapping : Time (s): cpu = 00:00:34 ; elapsed = 00:00:35 . Memory (MB): peak = 1502.629 ; gain = 594.000
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start IO Insertion
@@ -232,37 +231,37 @@ Start Final Netlist Cleanup
 Finished Final Netlist Cleanup
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:00:22 ; elapsed = 00:00:22 . Memory (MB): peak = 1478.426 ; gain = 557.668
+Finished IO Insertion : Time (s): cpu = 00:00:40 ; elapsed = 00:00:41 . Memory (MB): peak = 1502.629 ; gain = 594.000
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:00:22 ; elapsed = 00:00:22 . Memory (MB): peak = 1478.426 ; gain = 557.668
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:40 ; elapsed = 00:00:41 . Memory (MB): peak = 1502.629 ; gain = 594.000
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Rebuilding User Hierarchy
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:22 ; elapsed = 00:00:22 . Memory (MB): peak = 1478.426 ; gain = 557.668
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:40 ; elapsed = 00:00:41 . Memory (MB): peak = 1502.629 ; gain = 594.000
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Ports
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Ports : Time (s): cpu = 00:00:22 ; elapsed = 00:00:22 . Memory (MB): peak = 1478.426 ; gain = 557.668
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:40 ; elapsed = 00:00:41 . Memory (MB): peak = 1502.629 ; gain = 594.000
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:22 ; elapsed = 00:00:22 . Memory (MB): peak = 1478.426 ; gain = 557.668
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:40 ; elapsed = 00:00:41 . Memory (MB): peak = 1502.629 ; gain = 594.000
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Nets
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Nets : Time (s): cpu = 00:00:22 ; elapsed = 00:00:22 . Memory (MB): peak = 1478.426 ; gain = 557.668
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:40 ; elapsed = 00:00:41 . Memory (MB): peak = 1502.629 ; gain = 594.000
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Writing Synthesis Report
@@ -286,37 +285,37 @@ Report Cell Usage:
 |4     |CARRY4   |    24|
 |5     |LUT1     |    19|
 |6     |LUT2     |    46|
-|7     |LUT3     |    33|
+|7     |LUT3     |    38|
 |8     |LUT4     |    26|
-|9     |LUT5     |    60|
-|10    |LUT6     |    28|
+|9     |LUT5     |    68|
+|10    |LUT6     |    27|
 |11    |FDCE     |    99|
-|12    |FDPE     |     3|
+|12    |FDPE     |     2|
 |13    |FDRE     |     8|
 |14    |IBUF     |     4|
 |15    |OBUF     |     3|
 +------+---------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:00:22 ; elapsed = 00:00:22 . Memory (MB): peak = 1478.426 ; gain = 557.668
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:40 ; elapsed = 00:00:41 . Memory (MB): peak = 1502.629 ; gain = 594.000
 ---------------------------------------------------------------------------------
 Synthesis finished with 0 errors, 0 critical warnings and 1 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:00:15 ; elapsed = 00:00:21 . Memory (MB): peak = 1478.426 ; gain = 506.188
-Synthesis Optimization Complete : Time (s): cpu = 00:00:22 ; elapsed = 00:00:22 . Memory (MB): peak = 1478.426 ; gain = 557.668
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:26 ; elapsed = 00:00:38 . Memory (MB): peak = 1502.629 ; gain = 504.645
+Synthesis Optimization Complete : Time (s): cpu = 00:00:40 ; elapsed = 00:00:42 . Memory (MB): peak = 1502.629 ; gain = 594.000
 INFO: [Project 1-571] Translating synthesized netlist
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.004 . Memory (MB): peak = 1478.426 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.004 . Memory (MB): peak = 1502.629 ; gain = 0.000
 INFO: [Netlist 29-17] Analyzing 24 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Project 1-570] Preparing netlist for logic optimization
 INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1478.426 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1502.629 ; gain = 0.000
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
-Synth Design complete | Checksum: 67d556f3
+Synth Design complete | Checksum: 261c8d7d
 INFO: [Common 17-83] Releasing license: Synthesis
 40 Infos, 4 Warnings, 0 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:00:26 ; elapsed = 00:00:27 . Memory (MB): peak = 1478.426 ; gain = 961.812
-INFO: [Common 17-1381] The checkpoint 'F:/VIVADO WORKSPACE/image_rotate/image_rotate.runs/synth_1/top_module.dcp' has been generated.
+synth_design: Time (s): cpu = 00:00:46 ; elapsed = 00:00:50 . Memory (MB): peak = 1502.629 ; gain = 1000.035
+INFO: [Common 17-1381] The checkpoint 'D:/VIVADO_workspace/image_rotate/image_rotate.runs/synth_1/top_module.dcp' has been generated.
 INFO: [runtcl-4] Executing : report_utilization -file top_module_utilization_synth.rpt -pb top_module_utilization_synth.pb
-INFO: [Common 17-206] Exiting Vivado at Thu Nov 27 15:57:44 2025...
+INFO: [Common 17-206] Exiting Vivado at Fri Nov 28 08:51:35 2025...

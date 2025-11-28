@@ -2,8 +2,8 @@ import numpy as np
 from PIL import Image
 import os
 
-IMG_WIDTH = 256;
-IMG_HEIGHT = 256;
+IMG_WIDTH = 512
+IMG_HEIGHT = 256
 IMG_PATH = 'random.jpg' # đổi ảnh
 COE_FILE = 'image_data.coe' # file lưu dữ liệu ảnh
 
